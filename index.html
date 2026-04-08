@@ -3,104 +3,415 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keelan O'Doherty | Aerospace Engineering</title>
-  <meta name="description" content="Keelan O'Doherty — aerospace engineering work featuring ORCA eVTOL, UAV acoustics research, and applied systems projects." />
-  <link rel="stylesheet" href="./styles.css" />
+  <title>Keelan O'Doherty | Aerospace Engineer + AI Builder</title>
+  <meta name="description" content="Keelan O'Doherty - Aerospace engineering, AI infrastructure, and web design. University of Alabama. Building things that fly, think, and convert." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="container nav">
-      <a class="brand" href="#">Keelan O'Doherty</a>
-      <nav>
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Nav -->
+  <header class="topbar" id="topbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#">K.O'D</a>
+      <nav class="nav-links" id="navLinks">
         <a href="#about">About</a>
-        <a href="#research">Research</a>
         <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
-      <button id="themeToggle" class="theme-btn" aria-label="Toggle light and dark mode">◐</button>
+      <div class="nav-right">
+        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+          <span class="theme-icon">&#9790;</span>
+        </button>
+        <button class="mobile-menu" id="mobileMenu" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
-  <div class="scroll-progress"><span id="scrollProgress"></span></div>
 
-  <main>
-    <section class="hero container reveal">
-      <div>
-        <p class="kicker">Aerospace Engineering • Systems • Applied Research</p>
-        <h1>Applied aerospace engineering focused on safety, efficiency, and execution.</h1>
-        <p class="lead">I’m an Aerospace Engineering student at The University of Alabama focused on propulsion, flight dynamics, systems integration, and computational + experimental validation.</p>
-        <div class="cta-row">
-          <a class="btn" href="#research">Research</a>
-          <a class="btn ghost" href="https://github.com/Keelan4604" target="_blank" rel="noreferrer">GitHub</a>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge anim-slide-up">
+          <span class="pulse"></span>
+          Open to Opportunities
+        </div>
+        <h1 class="anim-slide-up anim-delay-1">
+          Aerospace engineer.<br/>
+          <span class="gradient-text">AI builder.</span><br/>
+          Problem solver.
+        </h1>
+        <p class="hero-sub anim-slide-up anim-delay-2">
+          I design aircraft systems, build AI-powered infrastructure, and create websites that actually make businesses money. Currently finishing my B.S. in Aerospace Engineering at The University of Alabama.
+        </p>
+        <div class="hero-cta anim-slide-up anim-delay-3">
+          <a class="btn btn-primary" href="#projects">See My Work</a>
+          <a class="btn btn-ghost" href="#contact">Get In Touch</a>
+        </div>
+        <div class="hero-stats anim-slide-up anim-delay-4">
+          <div class="stat">
+            <span class="stat-number" data-count="3">0</span>
+            <span class="stat-label">Disciplines</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-number" data-count="2026">0</span>
+            <span class="stat-label">Graduating</span>
+          </div>
         </div>
       </div>
-      <aside class="hero-card">
-        <img src="./assets/images/1727813143970.jpg" alt="Keelan O'Doherty" class="avatar" />
-        <h3>Keelan O'Doherty</h3>
-        <p>Tuscaloosa, AL</p>
-      </aside>
-    </section>
-
-    <section id="about" class="container section reveal">
-      <h2>About</h2>
-      <div class="grid two">
-        <article class="card">
-          <h3>Education</h3>
-          <p><strong>The University of Alabama</strong><br/>B.S. Aerospace Engineering, Minor in Mathematics<br/>Expected May 2026 • GPA: 3.612</p>
-          <p class="muted">Dean’s List: 2022–2026</p>
-        </article>
-        <article class="card">
-          <h3>Mission</h3>
-          <p>I build at the intersection of aerospace theory and implementation: CFD/FEA, MATLAB-driven flight modeling, and integrated prototype testing, with long-term focus on safer and more efficient aircraft systems.</p>
-        </article>
+      <div class="hero-visual anim-fade-in anim-delay-2">
+        <div class="hero-card-stack">
+          <div class="hero-portrait">
+            <img src="./assets/images/1727813143970.jpg" alt="Keelan O'Doherty" />
+            <div class="portrait-ring"></div>
+          </div>
+          <div class="floating-tag tag-1">MATLAB</div>
+          <div class="floating-tag tag-2">CFD/FEA</div>
+          <div class="floating-tag tag-3">Claude AI</div>
+          <div class="floating-tag tag-4">Python</div>
+        </div>
       </div>
-    </section>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-    <section id="research" class="container section reveal">
-      <h2>Research Highlights</h2>
-      <div class="grid two">
-        <article class="card">
-          <h3>✈ ORCA Fixed-Wing eVTOL UAV</h3>
-          <p>Reconnaissance-focused fixed-wing eVTOL platform with vertical takeoff/landing, efficient forward cruise, modular payload architecture, and autonomous mission capability for runway-independent operations.</p>
-          <p><a href="./senior-project.html">View Project Details ↗</a></p>
-        </article>
-        <article class="card">
-          <h3>UAV Propeller Acoustics (AERO)</h3>
-          <p>Designed and analyzed four propeller geometries using SolidWorks CFD/FEA at 10,000 RPM, followed by thrust and acoustic testing.</p>
-        </article>
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-label anim-reveal">About Me</div>
+      <div class="about-grid">
+        <div class="about-main anim-reveal">
+          <h2>Aerospace by training.<br/>AI and tech by obsession.</h2>
+          <p>I'm finishing my B.S. in Aerospace Engineering with a Math minor at the University of Alabama (May 2026, 3.612 GPA, Dean's List 2022-2026). My coursework covers propulsion, flight dynamics, structures, and computational methods.</p>
+          <p>But what really sets me apart is what I do outside the classroom. I've built a complete AI operations infrastructure called <strong>OpenClaw</strong> using Anthropic's Claude as my core engine. I use it daily to automate complex workflows, build websites for real clients, and solve engineering problems faster than traditional methods allow.</p>
+          <p>I'm not just someone who uses AI tools. I architect and deploy AI systems, configure their networking and security, and push them into production environments where they have to work reliably.</p>
+        </div>
+        <div class="about-cards anim-reveal">
+          <div class="info-card">
+            <div class="info-card-icon">&#127891;</div>
+            <h4>Education</h4>
+            <p><strong>The University of Alabama</strong></p>
+            <p>B.S. Aerospace Engineering, Minor in Mathematics</p>
+            <p class="muted">May 2026 &middot; GPA 3.612 &middot; Dean's List</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">&#128205;</div>
+            <h4>Location</h4>
+            <p>Tuscaloosa, AL</p>
+            <p class="muted">Relocating to Raleigh, NC area</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">&#9889;</div>
+            <h4>Focus Areas</h4>
+            <p>Aerospace Systems, AI/Automation, Web Design</p>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="projects" class="container section reveal">
-      <div class="row-between">
-        <h2>Technical Project Portfolio</h2>
-        <a href="https://github.com/Keelan4604?tab=repositories" target="_blank" rel="noreferrer">All repositories ↗</a>
+  <!-- Projects -->
+  <section id="projects" class="section section-dark">
+    <div class="container">
+      <div class="section-label anim-reveal">Featured Work</div>
+      <h2 class="section-title anim-reveal">Projects that matter.</h2>
+      <p class="section-sub anim-reveal">From autonomous aircraft to AI infrastructure to revenue-generating web design.</p>
+
+      <!-- ORCA -->
+      <div class="project-feature anim-reveal">
+        <div class="project-feature-media">
+          <div class="project-browser">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <img src="./assets/images/download (1).png" alt="ORCA eVTOL CAD render" class="project-hero-img" />
+          </div>
+        </div>
+        <div class="project-feature-info">
+          <span class="project-tag">Aerospace</span>
+          <h3>ORCA Fixed-Wing eVTOL UAV</h3>
+          <p>Reconnaissance-focused fixed-wing eVTOL platform with vertical takeoff/landing, efficient forward cruise, modular payload architecture, and autonomous mission capability. Senior design capstone project covering the full lifecycle from CDR to build readiness.</p>
+          <ul class="project-tech">
+            <li>SolidWorks</li>
+            <li>CFD/FEA</li>
+            <li>MATLAB</li>
+            <li>Flight Controls</li>
+            <li>3D Printing</li>
+          </ul>
+          <a class="btn btn-sm" href="./senior-project.html">View Full Project</a>
+        </div>
       </div>
-      <article class="card reveal">
-        <h3>OpenClaw AI Infrastructure & Automation</h3>
-        <p>Designed and deployed my own OpenClaw assistant stack with Cloudflare-backed domain routing, remote browser relay, and secure token-based integrations. I configured network paths and service exposure deliberately, then validated behavior end-to-end so the assistant can operate reliably across tools and web workflows.</p>
-        <p>This project reflects practical AI operations experience: translating model capabilities into dependable automation, hardening configuration choices, and troubleshooting deployment issues with a systems-and-networking mindset.</p>
-      </article>
-      <div id="projectGrid" class="grid three"></div>
-    </section>
 
-    <section id="contact" class="container section reveal">
-      <h2>Contact</h2>
-      <div class="grid two">
-        <article class="card">
-          <h3>Professional</h3>
-          <p><strong>Email:</strong> <a href="mailto:keelan.odoherty@icloud.com">keelan.odoherty@icloud.com</a><br/>
-          <strong>Phone:</strong> <a href="tel:+16023762533">(602) 376-2533</a><br/>
-          <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/keelan-odoherty" target="_blank" rel="noreferrer">Keelan O'Doherty</a></p>
-        </article>
-        <article class="card cta-card">
-          <h3>Professional Interests</h3>
-          <p>Interested in aerospace research collaboration, propulsion and flight-dynamics work, and engineering internship opportunities focused on aircraft systems and integration.</p>
-        </article>
+      <!-- OpenClaw -->
+      <div class="project-feature anim-reveal reverse">
+        <div class="project-feature-media">
+          <div class="project-browser">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="terminal-display">
+              <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">openclaw deploy --agent workspace</span></div>
+              <div class="terminal-line t-output">Initializing Claude agent with workspace tools...</div>
+              <div class="terminal-line t-output">Configuring Cloudflare domain routing...</div>
+              <div class="terminal-line t-output">Establishing secure browser relay...</div>
+              <div class="terminal-line t-success">&#10003; OpenClaw infrastructure live. All systems operational.</div>
+              <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cursor">|</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-feature-info">
+          <span class="project-tag">AI / Infrastructure</span>
+          <h3>OpenClaw AI Operations Platform</h3>
+          <p>My personal AI infrastructure stack built on Anthropic's Claude. Cloudflare-backed domain routing, remote browser relay, secure token-based integrations, and multi-agent orchestration. This isn't a wrapper around ChatGPT. It's a production AI operations environment that I built from scratch and use every single day.</p>
+          <ul class="project-tech">
+            <li>Claude AI</li>
+            <li>Cloudflare</li>
+            <li>MCP Servers</li>
+            <li>Browser Automation</li>
+            <li>API Integration</li>
+          </ul>
+          <a class="btn btn-sm" href="https://github.com/Keelan4604" target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="container footer">© <span id="year"></span> Keelan O'Doherty</footer>
-  <script src="./script.js" defer></script>
+      <!-- Web Design -->
+      <div class="project-feature anim-reveal">
+        <div class="project-feature-media">
+          <div class="project-browser">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="web-design-preview">
+              <div class="wd-mockup">
+                <div class="wd-nav"></div>
+                <div class="wd-hero-block"></div>
+                <div class="wd-cards">
+                  <div class="wd-card"></div>
+                  <div class="wd-card"></div>
+                  <div class="wd-card"></div>
+                </div>
+                <div class="wd-cta-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-feature-info">
+          <span class="project-tag">Web Design</span>
+          <h3>Freelance Web Design</h3>
+          <p>I design and build modern, conversion-focused websites for real businesses. I research prospects, analyze their current web presence, build polished redesign concepts, and pitch directly. These aren't template sites. Every build is hand-coded, mobile-first, and optimized to generate leads and revenue.</p>
+          <ul class="project-tech">
+            <li>HTML/CSS/JS</li>
+            <li>Cloudflare Pages</li>
+            <li>Conversion Design</li>
+            <li>Mobile-First</li>
+            <li>SEO</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Other Projects Grid -->
+      <h3 class="subsection-title anim-reveal">More Projects</h3>
+      <div class="project-grid anim-reveal">
+        <a class="project-card" href="https://github.com/Keelan4604/sim7000A-cellular-GSM-connection" target="_blank" rel="noreferrer">
+          <div class="project-card-top">
+            <span class="project-card-icon">&#128225;</span>
+            <span class="project-card-arrow">&nearr;</span>
+          </div>
+          <h4>SIM7000A LTE Telemetry</h4>
+          <p>Arduino LTE CAT-M1 communication node for remote telemetry and command workflows.</p>
+          <div class="project-card-tags"><span>Arduino</span><span>LTE</span><span>IoT</span></div>
+        </a>
+        <a class="project-card" href="https://github.com/Keelan4604/Arduino-Controller-for-Upfitter-Switches" target="_blank" rel="noreferrer">
+          <div class="project-card-top">
+            <span class="project-card-icon">&#9889;</span>
+            <span class="project-card-arrow">&nearr;</span>
+          </div>
+          <h4>Automotive Switch Controller</h4>
+          <p>Microcontroller-driven automotive switching and power-control architecture for upfitter switches.</p>
+          <div class="project-card-tags"><span>Arduino</span><span>Automotive</span><span>Electrical</span></div>
+        </a>
+        <a class="project-card" href="https://github.com/Keelan4604/Docker-Setup" target="_blank" rel="noreferrer">
+          <div class="project-card-top">
+            <span class="project-card-icon">&#128230;</span>
+            <span class="project-card-arrow">&nearr;</span>
+          </div>
+          <h4>Docker Infrastructure</h4>
+          <p>Containerized infrastructure migration for modular service management and deployment.</p>
+          <div class="project-card-tags"><span>Docker</span><span>DevOps</span><span>Linux</span></div>
+        </a>
+        <a class="project-card" href="https://github.com/Keelan4604/Home-Assistant" target="_blank" rel="noreferrer">
+          <div class="project-card-top">
+            <span class="project-card-icon">&#127968;</span>
+            <span class="project-card-arrow">&nearr;</span>
+          </div>
+          <h4>Home Automation Stack</h4>
+          <p>Full smart-home orchestration with Home Assistant, Homebridge, and custom device integrations.</p>
+          <div class="project-card-tags"><span>Home Assistant</span><span>IoT</span><span>Automation</span></div>
+        </a>
+        <a class="project-card" href="https://github.com/Keelan4604/EcoPro-IT-Management" target="_blank" rel="noreferrer">
+          <div class="project-card-top">
+            <span class="project-card-icon">&#128187;</span>
+            <span class="project-card-arrow">&nearr;</span>
+          </div>
+          <h4>EcoPro IT Management</h4>
+          <p>Operational IT automation and software integration for real business workflows.</p>
+          <div class="project-card-tags"><span>IT Ops</span><span>Automation</span><span>Business</span></div>
+        </a>
+        <a class="project-card" href="https://github.com/Keelan4604/Nextcloud" target="_blank" rel="noreferrer">
+          <div class="project-card-top">
+            <span class="project-card-icon">&#9729;</span>
+            <span class="project-card-arrow">&nearr;</span>
+          </div>
+          <h4>Self-Hosted Cloud</h4>
+          <p>Self-hosted Nextcloud stack with secure remote access and persistent storage services.</p>
+          <div class="project-card-tags"><span>Nextcloud</span><span>Linux</span><span>Networking</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills / AI Section -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-label anim-reveal">Capabilities</div>
+      <h2 class="section-title anim-reveal">Three lanes. One mindset.</h2>
+
+      <div class="skills-grid">
+        <div class="skill-lane anim-reveal">
+          <div class="skill-lane-header">
+            <span class="skill-icon">&#9992;</span>
+            <h3>Aerospace Engineering</h3>
+          </div>
+          <p>Aircraft design, propulsion analysis, flight dynamics, CFD/FEA, wind tunnel testing, systems integration, and computational validation.</p>
+          <div class="skill-tags">
+            <span>MATLAB</span><span>SolidWorks</span><span>CFD/FEA</span><span>Propulsion</span><span>Flight Dynamics</span><span>Structures</span><span>Wind Tunnel</span>
+          </div>
+        </div>
+
+        <div class="skill-lane anim-reveal">
+          <div class="skill-lane-header">
+            <span class="skill-icon">&#129302;</span>
+            <h3>AI & Automation</h3>
+          </div>
+          <p>I don't just use AI. I build with it. My OpenClaw platform runs on Anthropic's Claude, and I use it to automate research, code generation, system administration, browser-based workflows, and client outreach at a level most people don't realize is possible yet.</p>
+          <div class="skill-tags">
+            <span>Claude / Anthropic</span><span>MCP Protocol</span><span>Prompt Engineering</span><span>Browser Automation</span><span>Cloudflare Workers</span><span>Python</span>
+          </div>
+        </div>
+
+        <div class="skill-lane anim-reveal">
+          <div class="skill-lane-header">
+            <span class="skill-icon">&#128421;</span>
+            <h3>Web Design & Development</h3>
+          </div>
+          <p>Hand-coded, mobile-first websites built for conversion. I research real businesses, identify weak web presences, design complete redesigns, and pitch them directly. Every site is static, fast, and optimized for leads.</p>
+          <div class="skill-tags">
+            <span>HTML/CSS/JS</span><span>Responsive Design</span><span>Cloudflare Pages</span><span>SEO</span><span>Conversion Optimization</span><span>Static Sites</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Deep Dive -->
+      <div class="ai-callout anim-reveal">
+        <div class="ai-callout-inner">
+          <div class="ai-callout-text">
+            <h3>How I use AI differently</h3>
+            <p>Most people use ChatGPT to write emails. I architected a full production environment where Claude operates as a multi-tool agent with access to my filesystem, terminal, browser, and external APIs. I deploy it through Cloudflare infrastructure with secure token-based authentication. It's how I built the website you're looking at right now.</p>
+            <p>If you're hiring someone who understands applied AI at the infrastructure level, not just the prompt level, that's the gap I fill.</p>
+          </div>
+          <div class="ai-callout-visual">
+            <div class="ai-stack">
+              <div class="ai-layer">Anthropic Claude</div>
+              <div class="ai-connector"></div>
+              <div class="ai-layer">OpenClaw Platform</div>
+              <div class="ai-connector"></div>
+              <div class="ai-layer-row">
+                <div class="ai-layer-sm">Browser</div>
+                <div class="ai-layer-sm">Terminal</div>
+                <div class="ai-layer-sm">APIs</div>
+              </div>
+              <div class="ai-connector"></div>
+              <div class="ai-layer">Production Output</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section section-dark">
+    <div class="container contact-container">
+      <div class="contact-text anim-reveal">
+        <div class="section-label">Let's Talk</div>
+        <h2>Interested? Reach out.</h2>
+        <p>Whether it's an engineering role, a web design project, or you just want to talk about how AI is going to change everything, I'm always up for a conversation.</p>
+        <div class="contact-links">
+          <a href="mailto:keelan.odoherty@icloud.com" class="contact-link">
+            <span class="contact-link-icon">&#9993;</span>
+            <div>
+              <strong>Email</strong>
+              <span>keelan.odoherty@icloud.com</span>
+            </div>
+          </a>
+          <a href="tel:+16023762533" class="contact-link">
+            <span class="contact-link-icon">&#128222;</span>
+            <div>
+              <strong>Phone</strong>
+              <span>(602) 376-2533</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/keelan-odoherty" target="_blank" rel="noreferrer" class="contact-link">
+            <span class="contact-link-icon">&#128100;</span>
+            <div>
+              <strong>LinkedIn</strong>
+              <span>keelan-odoherty</span>
+            </div>
+          </a>
+          <a href="https://github.com/Keelan4604" target="_blank" rel="noreferrer" class="contact-link">
+            <span class="contact-link-icon">&#128187;</span>
+            <div>
+              <strong>GitHub</strong>
+              <span>Keelan4604</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-cta anim-reveal">
+        <div class="contact-card-big">
+          <h3>What I'm looking for</h3>
+          <ul>
+            <li>Aerospace engineering roles (systems, propulsion, flight dynamics)</li>
+            <li>AI/automation engineering positions</li>
+            <li>Web design clients (freelance, ongoing)</li>
+            <li>Research collaboration opportunities</li>
+          </ul>
+          <p class="muted">Raleigh, NC area preferred. Open to remote and relocation.</p>
+          <a class="btn btn-primary" href="mailto:keelan.odoherty@icloud.com">Send Me an Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>&copy; <span id="year"></span> Keelan O'Doherty</span>
+      <span class="footer-note">Designed and built by me. With Claude.</span>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

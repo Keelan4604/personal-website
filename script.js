@@ -1,87 +1,174 @@
+// ---- Year ----
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// ---- Theme Toggle ----
 const root = document.documentElement;
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') root.classList.add('light');
+const themeBtn = document.getElementById('themeToggle');
+const themeIcon = themeBtn?.querySelector('.theme-icon');
 
-document.getElementById('themeToggle')?.addEventListener('click', () => {
+if (localStorage.getItem('theme') === 'light') root.classList.add('light');
+updateThemeIcon();
+
+themeBtn?.addEventListener('click', () => {
   root.classList.toggle('light');
   localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+  updateThemeIcon();
 });
 
-function installScrollProgress() {
-  const bar = document.getElementById('scrollProgress');
-  if (!bar) return;
-  const update = () => {
-    const h = document.documentElement;
-    const max = h.scrollHeight - h.clientHeight;
-    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
-    bar.style.width = `${pct}%`;
-  };
-  window.addEventListener('scroll', update, { passive: true });
-  update();
+function updateThemeIcon() {
+  if (!themeIcon) return;
+  themeIcon.innerHTML = root.classList.contains('light') ? '&#9728;' : '&#9790;';
 }
 
-function installActiveNav() {
-  const links = [...document.querySelectorAll('nav a[href^="#"]')];
-  if (!links.length) return;
-  const byId = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
-  const sections = Object.keys(byId).map(id => document.getElementById(id)).filter(Boolean);
-  const io = new IntersectionObserver((entries) => {
+// ---- Mobile Menu ----
+const mobileMenu = document.getElementById('mobileMenu');
+const navLinks = document.getElementById('navLinks');
+
+mobileMenu?.addEventListener('click', () => {
+  mobileMenu.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+
+navLinks?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ---- Sticky Nav ----
+const topbar = document.getElementById('topbar');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 20) {
+    topbar.classList.add('scrolled');
+  } else {
+    topbar.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+// ---- Active Nav ----
+const navAnchors = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+if (navAnchors.length) {
+  const byId = Object.fromEntries(navAnchors.map(a => [a.getAttribute('href').slice(1), a]));
+  const sects = Object.keys(byId).map(id => document.getElementById(id)).filter(Boolean);
+  const navObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
+        navAnchors.forEach(l => l.classList.remove('active'));
         byId[e.target.id]?.classList.add('active');
       }
     });
-  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0.01 });
-  sections.forEach(s => io.observe(s));
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0.01 });
+  sects.forEach(s => navObserver.observe(s));
 }
 
+// ---- Cursor Glow (dark mode only) ----
+const cursorGlow = document.getElementById('cursorGlow');
+let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorGlow.classList.add('active');
+});
+
+document.addEventListener('mouseleave', () => {
+  cursorGlow.classList.remove('active');
+});
+
+function animateGlow() {
+  glowX += (mouseX - glowX) * 0.08;
+  glowY += (mouseY - glowY) * 0.08;
+  cursorGlow.style.left = glowX + 'px';
+  cursorGlow.style.top = glowY + 'px';
+  requestAnimationFrame(animateGlow);
+}
+animateGlow();
+
+// ---- Scroll Reveal ----
 function installReveal() {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => e.isIntersecting && e.target.classList.add('show'));
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.anim-reveal').forEach(el => revealObserver.observe(el));
 }
-
-const projectSummaries = {
-  'sim7000A-cellular-GSM-connection': 'Arduino LTE CAT-M1 communication node for remote telemetry and command workflows.',
-  'Arduino-Controller-for-Upfitter-Switches': 'Microcontroller-driven automotive switching and power-control architecture.',
-  'Nextcloud': 'Self-hosted cloud stack with secure remote access and persistent storage services.',
-  'Homebridge': 'Smart-home device bridge integrations and custom ecosystem configuration.',
-  'Home-Assistant': 'Home automation orchestration with custom controls and system integration.',
-  'Docker-Setup': 'Containerized infrastructure migration for modular service management.',
-  'EcoPro-IT-Management': 'Operational IT automation and software integration for business workflows.',
-  'Hackintosh-Project': 'System-level hardware/software integration and compatibility tuning.',
-  '2004-AR230': 'Marine restoration and technical rebuild documentation.',
-  'Jeep-Mods': 'Vehicle diagnostics and electrical/mechanical modification program.'
-};
-
-async function loadProjects() {
-  const grid = document.getElementById('projectGrid');
-  if (!grid) return;
-  try {
-    const res = await fetch('./data/projects.json', { cache: 'no-store' });
-    const projects = await res.json();
-    const excludedPatterns = [/personal\s*website\s*v?2/i, /website\s*v?2/i];
-    const top = projects
-      .filter(p => p?.name && !excludedPatterns.some(rx => rx.test(p.name)))
-      .slice(0, 9);
-    grid.innerHTML = top.map(p => `
-      <article class="card reveal">
-        <h3>${p.name}</h3>
-        <p>${projectSummaries[p.name] || p.description || 'Technical implementation repository and project notes.'}</p>
-        <a href="${p.url}" target="_blank" rel="noreferrer">Open Repository ↗</a>
-      </article>
-    `).join('');
-    installReveal();
-  } catch {
-    grid.innerHTML = '<p class="muted">Could not load projects right now.</p>';
-  }
-}
-
 installReveal();
-installScrollProgress();
-installActiveNav();
-loadProjects();
+
+// ---- Stat Counter Animation ----
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat-number[data-count]');
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      if (el.dataset.animated) return;
+      el.dataset.animated = 'true';
+
+      const target = parseInt(el.dataset.count, 10);
+      const duration = 1800;
+      const start = performance.now();
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current.toLocaleString();
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => counterObserver.observe(c));
+}
+animateCounters();
+
+// ---- Smooth scroll for anchor links ----
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ---- Typing effect for terminal ----
+function animateTerminal() {
+  const lines = document.querySelectorAll('.terminal-line');
+  if (!lines.length) return;
+
+  const terminalObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const parent = entry.target;
+      if (parent.dataset.animated) return;
+      parent.dataset.animated = 'true';
+
+      const allLines = parent.querySelectorAll('.terminal-line');
+      allLines.forEach((line, i) => {
+        line.style.opacity = '0';
+        line.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          line.style.transition = 'opacity 0.4s, transform 0.4s';
+          line.style.opacity = '1';
+          line.style.transform = 'none';
+        }, i * 400);
+      });
+    });
+  }, { threshold: 0.3 });
+
+  const terminalDisplay = document.querySelector('.terminal-display');
+  if (terminalDisplay) terminalObserver.observe(terminalDisplay);
+}
+animateTerminal();
