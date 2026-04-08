@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <circle cx="40" cy="40" r="40" fill="#00274C"/>
+  <!-- Block M path: two outer legs, center V -->
+  <path d="M10,18 L10,62 L20,62 L20,36 L40,58 L60,36 L60,62 L70,62 L70,18 L58,18 L40,44 L22,18 Z" fill="#FFCB05"/>
+</svg>
