@@ -284,11 +284,14 @@ ul { list-style: none; }
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: -0.04em;
   line-height: 1.2;
+  display: inline;
 }
 .stat-plus {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--accent);
+  display: inline;
+  margin-left: 2px;
 }
 .stat-label { font-size: 0.78rem; color: var(--text-3); margin-top: 2px; }
 .stat-divider { width: 1px; height: 36px; background: var(--border); }
