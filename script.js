@@ -1,3 +1,111 @@
+// ---- Particle Network ----
+(function () {
+  const canvas = document.getElementById('particleCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const PARTICLE_COUNT = 80;
+  const CONNECTION_DIST = 140;
+  const MOUSE_ATTRACT_DIST = 180;
+  const PARTICLE_SPEED = 0.4;
+
+  let W, H, mouse = { x: -9999, y: -9999 };
+  let particles = [];
+  let animId;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function Particle() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * PARTICLE_SPEED;
+    this.vy = (Math.random() - 0.5) * PARTICLE_SPEED;
+    this.r = Math.random() * 1.5 + 0.8;
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+  }
+
+  function getColor(alpha) {
+    const isLight = document.documentElement.classList.contains('light');
+    return isLight
+      ? `rgba(79,70,229,${alpha})`
+      : `rgba(99,102,241,${alpha})`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Update + draw particles
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      // Gentle mouse attraction
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < MOUSE_ATTRACT_DIST) {
+        const force = (MOUSE_ATTRACT_DIST - dist) / MOUSE_ATTRACT_DIST * 0.012;
+        p.vx += dx * force;
+        p.vy += dy * force;
+      }
+
+      // Speed cap
+      const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+      if (speed > 1.4) { p.vx *= 1.4 / speed; p.vy *= 1.4 / speed; }
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap edges
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+
+      // Draw dot
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = getColor(0.55);
+      ctx.fill();
+
+      // Draw connections
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const ex = p.x - q.x, ey = p.y - q.y;
+        const d = Math.sqrt(ex * ex + ey * ey);
+        if (d < CONNECTION_DIST) {
+          const alpha = (1 - d / CONNECTION_DIST) * 0.25;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = getColor(alpha);
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  window.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+  init();
+  draw();
+})();
+
 // ---- Year ----
 document.getElementById('year').textContent = new Date().getFullYear();
 

@@ -191,6 +191,16 @@ ul { list-style: none; }
 
 .btn-sm { padding: 8px 20px; font-size: 0.85rem; }
 
+/* --- Particle Canvas --- */
+.particle-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
 /* --- Hero --- */
 .hero {
   position: relative;
