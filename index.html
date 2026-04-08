@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keelan O'Doherty | Aerospace Engineering</title>
+  <meta name="description" content="Keelan O'Doherty — aerospace engineering work featuring ORCA eVTOL, UAV acoustics research, and applied systems projects." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#">Keelan O'Doherty</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle light and dark mode">◐</button>
+    </div>
+  </header>
+  <div class="scroll-progress"><span id="scrollProgress"></span></div>
+
+  <main>
+    <section class="hero container reveal">
+      <div>
+        <p class="kicker">Aerospace Engineering • Systems • Applied Research</p>
+        <h1>Applied aerospace engineering focused on safety, efficiency, and execution.</h1>
+        <p class="lead">I’m an Aerospace Engineering student at The University of Alabama focused on propulsion, flight dynamics, systems integration, and computational + experimental validation.</p>
+        <div class="cta-row">
+          <a class="btn" href="#research">Research</a>
+          <a class="btn ghost" href="https://github.com/Keelan4604" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <img src="./assets/images/1727813143970.jpg" alt="Keelan O'Doherty" class="avatar" />
+        <h3>Keelan O'Doherty</h3>
+        <p>Tuscaloosa, AL</p>
+      </aside>
+    </section>
+
+    <section id="about" class="container section reveal">
+      <h2>About</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>Education</h3>
+          <p><strong>The University of Alabama</strong><br/>B.S. Aerospace Engineering, Minor in Mathematics<br/>Expected May 2026 • GPA: 3.612</p>
+          <p class="muted">Dean’s List: 2022–2026</p>
+        </article>
+        <article class="card">
+          <h3>Mission</h3>
+          <p>I build at the intersection of aerospace theory and implementation: CFD/FEA, MATLAB-driven flight modeling, and integrated prototype testing, with long-term focus on safer and more efficient aircraft systems.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="research" class="container section reveal">
+      <h2>Research Highlights</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>✈ ORCA Fixed-Wing eVTOL UAV</h3>
+          <p>Reconnaissance-focused fixed-wing eVTOL platform with vertical takeoff/landing, efficient forward cruise, modular payload architecture, and autonomous mission capability for runway-independent operations.</p>
+          <p><a href="./senior-project.html">View Project Details ↗</a></p>
+        </article>
+        <article class="card">
+          <h3>UAV Propeller Acoustics (AERO)</h3>
+          <p>Designed and analyzed four propeller geometries using SolidWorks CFD/FEA at 10,000 RPM, followed by thrust and acoustic testing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="container section reveal">
+      <div class="row-between">
+        <h2>Technical Project Portfolio</h2>
+        <a href="https://github.com/Keelan4604?tab=repositories" target="_blank" rel="noreferrer">All repositories ↗</a>
+      </div>
+      <article class="card reveal">
+        <h3>OpenClaw AI Infrastructure & Automation</h3>
+        <p>Designed and deployed my own OpenClaw assistant stack with Cloudflare-backed domain routing, remote browser relay, and secure token-based integrations. I configured network paths and service exposure deliberately, then validated behavior end-to-end so the assistant can operate reliably across tools and web workflows.</p>
+        <p>This project reflects practical AI operations experience: translating model capabilities into dependable automation, hardening configuration choices, and troubleshooting deployment issues with a systems-and-networking mindset.</p>
+      </article>
+      <div id="projectGrid" class="grid three"></div>
+    </section>
+
+    <section id="contact" class="container section reveal">
+      <h2>Contact</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>Professional</h3>
+          <p><strong>Email:</strong> <a href="mailto:keelan.odoherty@icloud.com">keelan.odoherty@icloud.com</a><br/>
+          <strong>Phone:</strong> <a href="tel:+16023762533">(602) 376-2533</a><br/>
+          <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/keelan-odoherty" target="_blank" rel="noreferrer">Keelan O'Doherty</a></p>
+        </article>
+        <article class="card cta-card">
+          <h3>Professional Interests</h3>
+          <p>Interested in aerospace research collaboration, propulsion and flight-dynamics work, and engineering internship opportunities focused on aircraft systems and integration.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">© <span id="year"></span> Keelan O'Doherty</footer>
+  <script src="./script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senior Project | ORCA Fixed-Wing eVTOL</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="./index.html">Keelan O'Doherty</a>
+      <nav>
+        <a href="./index.html#about">About</a>
+        <a href="./index.html#research">Research</a>
+        <a href="./index.html#projects">Projects</a>
+      </nav>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle light and dark mode">◐</button>
+    </div>
+  </header>
+
+  <main class="container section reveal show">
+    <p class="kicker">AEM 402/404 Senior Design • Project ORCA</p>
+    <h1>Fixed-Frame eVTOL Reconnaissance UAV</h1>
+    <p class="lead">ORCA is a fixed-wing eVTOL aircraft designed for runway-independent reconnaissance operations with modular payload integration, autonomous mission capability, and an end-to-end system design flow from CDR to build readiness.</p>
+
+    <section class="section">
+      <h2>My Role and Contributions</h2>
+      <div class="card">
+        <p>Team roles were distributed across aerodynamics, structures, propulsion, controls, and integration. My strongest contributions on ORCA were in <strong>CAD-heavy integration work</strong>, system packaging, technical outreach, and serving as the project pilot.</p>
+        <ul>
+          <li>Supported full-airframe CAD iteration and integration alignment with subsystem teams.</li>
+          <li>Helped shape practical geometry decisions for manufacturability and assembly sequencing.</li>
+          <li>Contributed to design reviews and communication artifacts used in team presentations and project milestones.</li>
+          <li>Supported test-readiness activities and mission-oriented framing of the platform.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Executive Technical Snapshot</h2>
+      <div class="grid two">
+        <article class="card">
+          <h3>Mission and Performance Targets</h3>
+          <ul>
+            <li>Reconnaissance/ISR support with modular EO/IR payload capability</li>
+            <li>Cruise target: 17 m/s</li>
+            <li>Endurance target: 60 minutes (system goal)</li>
+            <li>VTOL hover target: 5–10 minutes with payload constraints</li>
+            <li>FAA Part 107 compliant operational envelope</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Configuration Summary</h3>
+          <ul>
+            <li>Fixed-wing layout with distributed VTOL rotors</li>
+            <li>Approx. 1.33–1.40 m wingspan, ~1.0 m length</li>
+            <li>Modular nose payload architecture with fast swap intent</li>
+            <li>3D-printed structure with reinforcement strategy</li>
+            <li>Battery-electric propulsion and integrated avionics stack</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Engineering Design Maturity (CDR)</h2>
+      <div class="card">
+        <p>The CDR baseline reflected a mature, build-ready direction: aerodynamic refinement, propulsion trade convergence, updated structures validation, and integrated control-transition logic. The vehicle architecture and subsystem interfaces were advanced enough to proceed into fabrication and testing with reduced technical risk.</p>
+        <p>Important system updates included aerodynamic model refinement, manufacturability-focused geometry updates, and tighter integration between airframe layout and avionics/power distribution constraints.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Project Visuals</h2>
+      <div class="grid two">
+        <figure class="card">
+          <img class="project-img" src="./assets/images/download (1).png" alt="ORCA CAD perspective render showing fixed-wing body and VTOL arms" />
+          <figcaption>Early perspective CAD rendering used during integration reviews to validate subsystem packaging and wing/body geometry continuity.</figcaption>
+        </figure>
+        <figure class="card">
+          <img class="project-img" src="./assets/images/download (2).png" alt="Top perspective dark render of ORCA airframe" />
+          <figcaption>Top-oriented CAD view used to evaluate rotor placement symmetry, centerline geometry, and volume allocation for internal systems.</figcaption>
+        </figure>
+        <figure class="card">
+          <img class="project-img" src="./assets/images/download (3).png" alt="Top orthographic wireframe view with subsystem labels" />
+          <figcaption>Orthographic layout supporting integration planning across transition management, flight-control interfaces, and propulsion/power routing.</figcaption>
+        </figure>
+        <figure class="card">
+          <img class="project-img" src="./assets/images/download.png" alt="Avionics wiring schematic for flight controller, GPS, VTX, receiver, ESCs, and power" />
+          <figcaption>Electrical integration schematic showing avionics interconnects, telemetry paths, and power distribution architecture for VTOL-capable control.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">© <span id="year"></span> Keelan O'Doherty</footer>
+  <script src="./script.js" defer></script>
+</body>
+</html>
