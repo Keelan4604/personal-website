@@ -27,13 +27,34 @@ integration and test, mission operations, TPM at space companies).
 | File | What |
 |---|---|
 | `index.html` | One page. Hero, marquee, about, stats, work (5 featured + 6 minis), experience timeline, education, skills, resume, contact. |
-| `styles.css` | Design system. Dark base, cyan / violet / orange accents, Space Grotesk + Inter + JetBrains Mono. |
-| `main.js` | Lenis smooth scroll, GSAP hero reveal, typed role, reveals, counters, spotlight/tilt cards, magnetic buttons, timeline progress, mobile menu. |
-| `scene.js` | Three.js hero: procedural Starship-class rocket on a pad. Scroll ignites it, it climbs, the Earth's limb appears, the scene fades out by the stats section. ES module via importmap, CDN-hosted three 0.170. Disabled automatically without WebGL. |
+| `styles.css` | Design system. **Light theme** (2026-09-12): off-white ground, white cards with soft shadows, cyan / violet / orange accents, Space Grotesk + Inter + JetBrains Mono. |
+| `main.js` | Lenis smooth scroll, GSAP hero reveal, typed role, reveals, counters, timeline progress, mobile menu. One rAF-coalesced scroll pass with cached offsets. |
+| `scene.js` | Three.js hero: procedural launch vehicle on a pad in daylight. Scroll ignites it and it climbs out of frame; the scene fades out before the About section. ES module via importmap, CDN-hosted three 0.170. Off automatically without WebGL and on viewports under 820 px. |
 | `assets/Keelan_ODoherty_Resume.pdf` | Copy of `Career/Job-Search/materials/ODoherty-Keelan-Resume-CURRENT.pdf`. **Re-copy whenever the resume changes.** `/resume` redirects here. |
 | `assets/img/` | headshot (200px, only one on file), UA and UMich wordmarks, ORCA isometric render (background knocked out from `School/Classes/402/ORCA_v6/Images/isometric.png`), SRPS chamber-pressure plot (AEM 428), EcoPro D8T air-induction CAD render, `og.png` share card. |
 | `_headers`, `_redirects` | Security headers, asset caching, `/resume` and old `/senior-project` redirects. |
 | `favicon.svg` | Gradient rocket mark. |
+
+## Light theme and the performance pass, 2026-09-12
+
+The first version was dark and it ran badly, on Keelan's own desktop included. Both were fixed in
+one pass. Measured after: **60 fps locked, zero frames over 20 ms, worst frame 18 ms** through a
+continuous scroll of the hero launch and the work grid.
+
+What was costing the frames, in rough order:
+
+| Cause | Fix |
+|---|---|
+| `backdrop-filter` on every card, a dozen blurred surfaces repainting on scroll | Kept on the nav only. This was the single biggest win. |
+| `UnrealBloomPass` + `EffectComposer`, three extra full-screen passes per frame | Removed. Direct render, one pass. The flame carries the glow in its own shader. |
+| Procedural Earth: 5-octave 3D noise per pixel over a full-screen sphere | Removed the planet entirely. Daylight climb instead. |
+| 1,400 particles with positions recomputed in JS and uploaded every frame | 420 points, motion computed in the vertex shader from a seed plus the clock. The CPU never touches a position. |
+| 2,200-point starfield, atmosphere shell, full-page blur filters, grain overlay, cursor-follow rAF loop | All removed. |
+| `offsetTop` and `getBoundingClientRect` read on every scroll event | One rAF-coalesced pass, offsets cached and re-measured on resize only. |
+
+Also added: pixel ratio capped at 1.5, render skipped entirely once the hero is off screen, and a
+frame-time watchdog that drops to 1x resolution and then disables the scene if frames run long.
+**Do not reintroduce bloom, a noise-shader planet, or card-level backdrop-filter.**
 
 ## Content rules that apply here
 
