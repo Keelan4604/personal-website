@@ -1,431 +1,676 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Keelan O'Doherty | Aerospace Engineer + AI Builder</title>
-  <meta name="description" content="Keelan O'Doherty - Aerospace engineering, AI infrastructure, and web design. University of Alabama. Building things that fly, think, and convert." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <title>Keelan O'Doherty | Aerospace Systems Engineer</title>
+  <meta name="description" content="Keelan O'Doherty is an aerospace engineer at the University of Michigan (MS, Space Systems) working toward systems engineering, integration and test, and mission operations. Systems engineer on a Northrop Grumman sponsored lunar cargo module." />
+  <meta name="keywords" content="Keelan O'Doherty, aerospace engineer, systems engineering, space systems, University of Michigan, University of Alabama, eVTOL, propeller acoustics, lunar cargo, Northrop Grumman MDP, integration and test, mission operations" />
+  <meta name="author" content="Keelan O'Doherty" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#05060d" />
+  <link rel="canonical" href="https://keelanodoherty.org/" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://keelanodoherty.org/" />
+  <meta property="og:title" content="Keelan O'Doherty | Aerospace Systems Engineer" />
+  <meta property="og:description" content="MS Aerospace Engineering (Space Systems) at Michigan. Systems engineer on a Northrop Grumman sponsored lunar cargo module. eVTOL test pilot, propeller acoustics researcher, builder." />
+  <meta property="og:image" content="https://keelanodoherty.org/assets/img/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Keelan O'Doherty | Aerospace Systems Engineer" />
+  <meta name="twitter:description" content="MS Aerospace Engineering (Space Systems) at Michigan. Systems engineer on a Northrop Grumman sponsored lunar cargo module." />
+  <meta name="twitter:image" content="https://keelanodoherty.org/assets/img/og.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Keelan O'Doherty",
+    "url": "https://keelanodoherty.org",
+    "image": "https://keelanodoherty.org/assets/img/headshot.jpg",
+    "jobTitle": "Aerospace Engineer, MS Student (Space Systems)",
+    "email": "mailto:keelan.odoherty@icloud.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Ann Arbor", "addressRegion": "MI", "addressCountry": "US" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "University of Michigan", "sameAs": "https://umich.edu" },
+      { "@type": "CollegeOrUniversity", "name": "University of Alabama", "sameAs": "https://www.ua.edu" }
+    ],
+    "knowsAbout": ["Systems Engineering", "Spacecraft Technology", "Integration and Test", "Mission Operations", "eVTOL", "Propeller Acoustics", "CFD", "FEA", "MATLAB/Simulink", "SolidWorks"],
+    "sameAs": ["https://github.com/Keelan4604", "https://linkedin.com/in/keelanodoherty"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
 
-  <!-- Cursor glow -->
-  <div class="cursor-glow" id="cursorGlow"></div>
+  <div id="loader" class="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-mark">KO'D</div>
+      <div class="loader-bar"><i></i></div>
+      <div class="loader-sub">Pre-flight checks</div>
+    </div>
+  </div>
 
-  <!-- Nav -->
-  <header class="topbar" id="topbar">
-    <div class="container nav-inner">
-      <a class="brand" href="#">K.O'D</a>
-      <nav class="nav-links" id="navLinks">
+  <div class="bg-aurora" aria-hidden="true"></div>
+  <div id="scene" aria-hidden="true"></div>
+  <div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ===== NAV ===== -->
+  <nav id="nav" class="nav" aria-label="Primary">
+    <div class="container">
+      <a href="#top" class="brand"><span class="brand-mark">K</span><span>Keelan O'Doherty</span></a>
+      <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
         <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="nav-right">
-        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
-          <span class="theme-icon">&#9790;</span>
-        </button>
-        <button class="mobile-menu" id="mobileMenu" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
+        <a href="#resume">Resume</a>
       </div>
+      <a href="#contact" class="btn btn-ghost btn-sm nav-cta">Get in touch
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <button id="burger" class="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
-  </header>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </div>
 
-  <!-- Hero -->
-  <section class="hero">
-    <canvas id="particleCanvas" class="particle-canvas"></canvas>
-    <div class="hero-bg-grid"></div>
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <div class="hero-badge anim-slide-up">
-          <span class="pulse"></span>
-          Open to Opportunities
-        </div>
-        <h1 class="anim-slide-up anim-delay-1">
-          Aerospace engineer.<br/>
-          <span class="gradient-text">AI builder.</span><br/>
-          Problem solver.
-        </h1>
-        <p class="hero-sub anim-slide-up anim-delay-2">
-          I design aircraft systems, build AI-powered infrastructure, and create websites that actually make businesses money. Currently finishing my B.S. in Aerospace Engineering at The University of Alabama.
-        </p>
-        <div class="hero-cta anim-slide-up anim-delay-3">
-          <a class="btn btn-primary" href="#projects">See My Work</a>
-          <a class="btn btn-ghost" href="#contact">Get In Touch</a>
-        </div>
-        <div class="hero-stats anim-slide-up anim-delay-4">
-          <div class="stat">
-            <span class="stat-number" data-count="3">0</span>
-            <span class="stat-label">Disciplines</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat">
-            <span class="stat-value"><span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span></span>
-            <span class="stat-label">Projects</span>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat">
-            <span class="stat-number" data-count="2026">0</span>
-            <span class="stat-label">B.S. + U-M M.S.</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual anim-fade-in anim-delay-2">
-        <div class="hero-card-stack">
-          <div class="hero-portrait">
-            <img src="./assets/images/1727813143970.jpg" alt="Keelan O'Doherty" />
-            <div class="portrait-ring"></div>
-          </div>
-          <div class="floating-tag tag-1">MATLAB</div>
-          <div class="floating-tag tag-2">CFD/FEA</div>
-          <div class="floating-tag tag-3">Claude AI</div>
-          <div class="floating-tag tag-4">Python</div>
-        </div>
-      </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <span>scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+  <div class="wrap" id="top">
 
-  <!-- About -->
-  <section id="about" class="section">
-    <div class="container">
-      <div class="section-label anim-reveal">About Me</div>
-      <div class="about-grid">
-        <div class="about-main anim-reveal">
-          <h2>Aerospace by training.<br/>AI and tech by obsession.</h2>
-          <p>I'm finishing my B.S. in Aerospace Engineering with a Math minor at the University of Alabama (May 2026, 3.612 GPA, Dean's List 2022-2026). My coursework covers propulsion, flight dynamics, structures, and computational methods.</p>
-          <p>But what really sets me apart is what I do outside the classroom. I've built a complete AI operations infrastructure called <strong>OpenClaw</strong> using Anthropic's Claude as my core engine. I use it daily to automate complex workflows, build websites for real clients, and solve engineering problems faster than traditional methods allow.</p>
-          <p>I'm not just someone who uses AI tools. I architect and deploy AI systems, configure their networking and security, and push them into production environments where they have to work reliably.</p>
-        </div>
-        <div class="about-cards anim-reveal">
-          <div class="info-card">
-            <div class="info-card-icon">&#127891;</div>
-            <h4>Education</h4>
-            <div class="school-row">
-              <img src="./assets/images/logo-ua.png" alt="University of Alabama" class="school-logo" />
-              <div>
-                <p><strong>The University of Alabama</strong></p>
-                <p>B.S. Aerospace Engineering, Minor in Mathematics</p>
-                <p class="muted">May 2026 &middot; GPA 3.612 &middot; Dean's List</p>
-              </div>
-            </div>
-            <div class="school-row">
-              <img src="./assets/images/logo-umich.png" alt="University of Michigan" class="school-logo" />
-              <div>
-                <p><strong>University of Michigan</strong></p>
-                <p>M.S. Aerospace Engineering</p>
-                <p class="muted">Starting Fall 2026</p>
-              </div>
-            </div>
+    <!-- ===== HERO ===== -->
+    <header class="hero" id="hero">
+      <div class="container">
+        <div class="hero-copy">
+          <span class="pill"><i></i>Open to Summer 2027 internships</span>
+          <h1>
+            <span class="line"><span>Keelan</span></span>
+            <span class="line"><span class="grad">O'Doherty</span></span>
+          </h1>
+          <div class="hero-role"><span>I'm a</span> <span class="typed" id="typed"></span><span class="caret"></span></div>
+          <p class="lead">
+            Aerospace engineer working toward systems engineering, integration and test, and mission operations.
+            MS in Aerospace Engineering (Space Systems) at the University of Michigan, BS from the University of Alabama Honors College.
+            Right now I'm the systems engineer on a Northrop Grumman sponsored lunar cargo module.
+          </p>
+          <div class="hero-cta">
+            <a href="#work" class="btn btn-primary">See the work
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </a>
+            <a href="#resume" class="btn btn-ghost">View resume
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v5h5M7 3h7l5 5v13H7z"/><path d="M10 13h5M10 17h5"/></svg>
+            </a>
           </div>
-          <div class="info-card">
-            <div class="info-card-icon">&#128205;</div>
-            <h4>Location</h4>
-            <p>Tuscaloosa, AL</p>
-            <p class="muted">Open to opportunities</p>
-          </div>
-          <div class="info-card">
-            <div class="info-card-icon">&#9889;</div>
-            <h4>Focus Areas</h4>
-            <p>Aerospace Systems, AI/Automation, Web Design</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="section section-dark">
-    <div class="container">
-      <div class="section-label anim-reveal">Featured Work</div>
-      <h2 class="section-title anim-reveal">Projects that matter.</h2>
-      <p class="section-sub anim-reveal">From autonomous aircraft to AI infrastructure to revenue-generating web design.</p>
-
-      <!-- ORCA -->
-      <div class="project-feature anim-reveal">
-        <div class="project-feature-media">
-          <div class="project-browser">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <img src="./assets/images/download (1).png" alt="ORCA eVTOL CAD render" class="project-hero-img" />
-          </div>
-        </div>
-        <div class="project-feature-info">
-          <span class="project-tag">Aerospace</span>
-          <h3>ORCA Fixed-Wing eVTOL UAV</h3>
-          <p>Reconnaissance-focused fixed-wing eVTOL platform with vertical takeoff/landing, efficient forward cruise, modular payload architecture, and autonomous mission capability. Senior design capstone project covering the full lifecycle from CDR to build readiness.</p>
-          <ul class="project-tech">
-            <li>SolidWorks</li>
-            <li>CFD/FEA</li>
-            <li>MATLAB</li>
-            <li>Flight Controls</li>
-            <li>3D Printing</li>
-          </ul>
-          <a class="btn btn-sm" href="./senior-project.html">View Full Project</a>
-        </div>
-      </div>
-
-      <!-- OpenClaw -->
-      <div class="project-feature anim-reveal reverse">
-        <div class="project-feature-media">
-          <div class="project-browser">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="terminal-display">
-              <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">openclaw deploy --agent workspace</span></div>
-              <div class="terminal-line t-output">Initializing Claude agent with workspace tools...</div>
-              <div class="terminal-line t-output">Configuring Cloudflare domain routing...</div>
-              <div class="terminal-line t-output">Establishing secure browser relay...</div>
-              <div class="terminal-line t-success">&#10003; OpenClaw infrastructure live. All systems operational.</div>
-              <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cursor">|</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="project-feature-info">
-          <span class="project-tag">AI / Infrastructure</span>
-          <h3>OpenClaw AI Operations Platform</h3>
-          <p>My personal AI infrastructure stack built on Anthropic's Claude. Cloudflare-backed domain routing, remote browser relay, secure token-based integrations, and multi-agent orchestration. This isn't a wrapper around ChatGPT. It's a production AI operations environment that I built from scratch and use every single day.</p>
-          <ul class="project-tech">
-            <li>Claude AI</li>
-            <li>Cloudflare</li>
-            <li>MCP Servers</li>
-            <li>Browser Automation</li>
-            <li>API Integration</li>
-          </ul>
-          <a class="btn btn-sm" href="https://github.com/Keelan4604" target="_blank" rel="noreferrer">View on GitHub</a>
-        </div>
-      </div>
-
-      <!-- Web Design -->
-      <div class="project-feature anim-reveal">
-        <div class="project-feature-media">
-          <div class="project-browser">
-            <div class="browser-dots"><span></span><span></span><span></span></div>
-            <div class="web-design-preview">
-              <div class="wd-mockup">
-                <div class="wd-nav"></div>
-                <div class="wd-hero-block"></div>
-                <div class="wd-cards">
-                  <div class="wd-card"></div>
-                  <div class="wd-card"></div>
-                  <div class="wd-card"></div>
-                </div>
-                <div class="wd-cta-block"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="project-feature-info">
-          <span class="project-tag">Web Design</span>
-          <h3>Freelance Web Design</h3>
-          <p>I design and build modern, conversion-focused websites for real businesses. I research prospects, analyze their current web presence, build polished redesign concepts, and pitch directly. These aren't template sites. Every build is hand-coded, mobile-first, and optimized to generate leads and revenue.</p>
-          <ul class="project-tech">
-            <li>HTML/CSS/JS</li>
-            <li>Cloudflare Pages</li>
-            <li>Conversion Design</li>
-            <li>Mobile-First</li>
-            <li>SEO</li>
+          <ul class="hero-facts">
+            <li><b>University of Michigan</b> MS, Space Systems</li>
+            <li><b>Northrop Grumman</b> sponsored MDP project</li>
+            <li><b>U.S. citizen</b>, ITAR eligible</li>
           </ul>
         </div>
+        <div class="hero-stage" aria-hidden="true">
+          <div class="hero-hud">
+            <div class="hud-row"><span>ALT</span><b id="hud-alt">   0.0 km</b></div>
+            <div class="hud-row"><span>VEL</span><b id="hud-vel">    0 m/s</b></div>
+            <div class="hud-row"><span>THR</span><b id="hud-thr">  0 %</b></div>
+            <div class="hud-row"><span>SCROLL TO LAUNCH</span></div>
+          </div>
+        </div>
       </div>
+      <div class="scroll-cue" aria-hidden="true"><div class="mouse"></div><span>Scroll</span></div>
+    </header>
 
-      <!-- Other Projects Grid -->
-      <h3 class="subsection-title anim-reveal">More Projects</h3>
-      <div class="project-grid anim-reveal">
-        <a class="project-card" href="https://github.com/Keelan4604/sim7000A-cellular-GSM-connection" target="_blank" rel="noreferrer">
-          <div class="project-card-top">
-            <span class="project-card-icon">&#128225;</span>
-            <span class="project-card-arrow">&nearr;</span>
-          </div>
-          <h4>SIM7000A LTE Telemetry</h4>
-          <p>Arduino LTE CAT-M1 communication node for remote telemetry and command workflows.</p>
-          <div class="project-card-tags"><span>Arduino</span><span>LTE</span><span>IoT</span></div>
-        </a>
-        <a class="project-card" href="https://github.com/Keelan4604/Arduino-Controller-for-Upfitter-Switches" target="_blank" rel="noreferrer">
-          <div class="project-card-top">
-            <span class="project-card-icon">&#9889;</span>
-            <span class="project-card-arrow">&nearr;</span>
-          </div>
-          <h4>Automotive Switch Controller</h4>
-          <p>Microcontroller-driven automotive switching and power-control architecture for upfitter switches.</p>
-          <div class="project-card-tags"><span>Arduino</span><span>Automotive</span><span>Electrical</span></div>
-        </a>
-        <a class="project-card" href="https://github.com/Keelan4604/Docker-Setup" target="_blank" rel="noreferrer">
-          <div class="project-card-top">
-            <span class="project-card-icon">&#128230;</span>
-            <span class="project-card-arrow">&nearr;</span>
-          </div>
-          <h4>Docker Infrastructure</h4>
-          <p>Containerized infrastructure migration for modular service management and deployment.</p>
-          <div class="project-card-tags"><span>Docker</span><span>DevOps</span><span>Linux</span></div>
-        </a>
-        <a class="project-card" href="https://github.com/Keelan4604/Home-Assistant" target="_blank" rel="noreferrer">
-          <div class="project-card-top">
-            <span class="project-card-icon">&#127968;</span>
-            <span class="project-card-arrow">&nearr;</span>
-          </div>
-          <h4>Home Automation Stack</h4>
-          <p>Full smart-home orchestration with Home Assistant, Homebridge, and custom device integrations.</p>
-          <div class="project-card-tags"><span>Home Assistant</span><span>IoT</span><span>Automation</span></div>
-        </a>
-        <a class="project-card" href="https://github.com/Keelan4604/EcoPro-IT-Management" target="_blank" rel="noreferrer">
-          <div class="project-card-top">
-            <span class="project-card-icon">&#128187;</span>
-            <span class="project-card-arrow">&nearr;</span>
-          </div>
-          <h4>EcoPro IT Management</h4>
-          <p>Operational IT automation and software integration for real business workflows.</p>
-          <div class="project-card-tags"><span>IT Ops</span><span>Automation</span><span>Business</span></div>
-        </a>
-        <a class="project-card" href="https://github.com/Keelan4604/Nextcloud" target="_blank" rel="noreferrer">
-          <div class="project-card-top">
-            <span class="project-card-icon">&#9729;</span>
-            <span class="project-card-arrow">&nearr;</span>
-          </div>
-          <h4>Self-Hosted Cloud</h4>
-          <p>Self-hosted Nextcloud stack with secure remote access and persistent storage services.</p>
-          <div class="project-card-tags"><span>Nextcloud</span><span>Linux</span><span>Networking</span></div>
-        </a>
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <ul>
+          <li>Systems engineering</li><li>Requirements &amp; verification</li><li>Integration &amp; test</li><li>Mission operations</li>
+          <li>eVTOL flight test</li><li>Propeller acoustics</li><li>CFD &amp; FEA</li><li>MATLAB / Simulink</li><li>SolidWorks</li>
+          <li>Lunar logistics</li><li>Mass &amp; power budgets</li><li>Embedded telemetry</li><li>3D printing</li><li>Engine rebuilds</li>
+        </ul>
+        <ul>
+          <li>Systems engineering</li><li>Requirements &amp; verification</li><li>Integration &amp; test</li><li>Mission operations</li>
+          <li>eVTOL flight test</li><li>Propeller acoustics</li><li>CFD &amp; FEA</li><li>MATLAB / Simulink</li><li>SolidWorks</li>
+          <li>Lunar logistics</li><li>Mass &amp; power budgets</li><li>Embedded telemetry</li><li>3D printing</li><li>Engine rebuilds</li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- Skills / AI Section -->
-  <section id="skills" class="section">
-    <div class="container">
-      <div class="section-label anim-reveal">Capabilities</div>
-      <h2 class="section-title anim-reveal">Three lanes. One mindset.</h2>
-
-      <div class="skills-grid">
-        <div class="skill-lane anim-reveal">
-          <div class="skill-lane-header">
-            <span class="skill-icon">&#9992;</span>
-            <h3>Aerospace Engineering</h3>
-          </div>
-          <p>Aircraft design, propulsion analysis, flight dynamics, CFD/FEA, wind tunnel testing, systems integration, and computational validation.</p>
-          <div class="skill-tags">
-            <span>MATLAB</span><span>SolidWorks</span><span>CFD/FEA</span><span>Propulsion</span><span>Flight Dynamics</span><span>Structures</span><span>Wind Tunnel</span>
-          </div>
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-text">
+          <span class="eyebrow reveal">About</span>
+          <h2 class="title">Requirements on one side, <span class="grad-cv">hardware</span> on the other.</h2>
+          <p class="reveal">I like the part of engineering where the two meet: writing the requirement, building the test, running the vehicle, and finding out where the model and the hardware disagree.</p>
+          <p class="reveal" data-delay="1">That has looked like bench-testing UAV propellers at 10,000 RPM against CFD predictions, flying the eVTOL my capstone team designed and built, restoring more than sixty jet skis and boats from teardown through functional test, and designing filtration components to Caterpillar and Komatsu fitment guidelines for my family's business.</p>
+          <p class="reveal" data-delay="2">Now I'm at the University of Michigan for an MS in Aerospace Engineering with a Space Systems focus. My main project is a six-person team designing a standardized lunar cargo module for Northrop Grumman through Michigan's Multidisciplinary Design Program, where I own the requirements set, the verification methods, and the mass and power budgets.</p>
+          <p class="reveal" data-delay="3">Outside of that I fix things with engines, run a 3D printer, and keep a small home lab of self-hosted services running.</p>
         </div>
-
-        <div class="skill-lane anim-reveal">
-          <div class="skill-lane-header">
-            <span class="skill-icon">&#129302;</span>
-            <h3>AI & Automation</h3>
+        <aside class="about-card reveal" data-delay="2">
+          <div class="avatar-wrap">
+            <div class="avatar"><img src="assets/img/headshot.jpg" alt="Keelan O'Doherty" width="84" height="84" /></div>
+            <div class="avatar-meta"><b>Keelan O'Doherty</b><span>Ann Arbor, Michigan</span></div>
           </div>
-          <p>I don't just use AI. I build with it. My OpenClaw platform runs on Anthropic's Claude, and I use it to automate research, code generation, system administration, browser-based workflows, and client outreach at a level most people don't realize is possible yet.</p>
-          <div class="skill-tags">
-            <span>Claude / Anthropic</span><span>MCP Protocol</span><span>Prompt Engineering</span><span>Browser Automation</span><span>Cloudflare Workers</span><span>Python</span>
-          </div>
-        </div>
-
-        <div class="skill-lane anim-reveal">
-          <div class="skill-lane-header">
-            <span class="skill-icon">&#128421;</span>
-            <h3>Web Design & Development</h3>
-          </div>
-          <p>Hand-coded, mobile-first websites built for conversion. I research real businesses, identify weak web presences, design complete redesigns, and pitch them directly. Every site is static, fast, and optimized for leads.</p>
-          <div class="skill-tags">
-            <span>HTML/CSS/JS</span><span>Responsive Design</span><span>Cloudflare Pages</span><span>SEO</span><span>Conversion Optimization</span><span>Static Sites</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Deep Dive -->
-      <div class="ai-callout anim-reveal">
-        <div class="ai-callout-inner">
-          <div class="ai-callout-text">
-            <h3>How I use AI differently</h3>
-            <p>Most people use ChatGPT to write emails. I architected a full production environment where Claude operates as a multi-tool agent with access to my filesystem, terminal, browser, and external APIs. I deploy it through Cloudflare infrastructure with secure token-based authentication. It's how I built the website you're looking at right now.</p>
-            <p>If you're hiring someone who understands applied AI at the infrastructure level, not just the prompt level, that's the gap I fill.</p>
-          </div>
-          <div class="ai-callout-visual">
-            <div class="ai-stack">
-              <div class="ai-layer">Anthropic Claude</div>
-              <div class="ai-connector"></div>
-              <div class="ai-layer">OpenClaw Platform</div>
-              <div class="ai-connector"></div>
-              <div class="ai-layer-row">
-                <div class="ai-layer-sm">Browser</div>
-                <div class="ai-layer-sm">Terminal</div>
-                <div class="ai-layer-sm">APIs</div>
-              </div>
-              <div class="ai-connector"></div>
-              <div class="ai-layer">Production Output</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section section-dark">
-    <div class="container contact-container">
-      <div class="contact-text anim-reveal">
-        <div class="section-label">Let's Talk</div>
-        <h2>Interested? Reach out.</h2>
-        <p>Whether it's an engineering role, a web design project, or you just want to talk about how AI is going to change everything, I'm always up for a conversation.</p>
-        <div class="contact-links">
-          <a href="mailto:keelan.odoherty@icloud.com" class="contact-link">
-            <span class="contact-link-icon">&#9993;</span>
-            <div>
-              <strong>Email</strong>
-              <span>keelan.odoherty@icloud.com</span>
-            </div>
-          </a>
-          <a href="tel:+16023762533" class="contact-link">
-            <span class="contact-link-icon">&#128222;</span>
-            <div>
-              <strong>Phone</strong>
-              <span>(602) 376-2533</span>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/keelan-odoherty" target="_blank" rel="noreferrer" class="contact-link">
-            <span class="contact-link-icon">&#128100;</span>
-            <div>
-              <strong>LinkedIn</strong>
-              <span>keelan-odoherty</span>
-            </div>
-          </a>
-          <a href="https://github.com/Keelan4604" target="_blank" rel="noreferrer" class="contact-link">
-            <span class="contact-link-icon">&#128187;</span>
-            <div>
-              <strong>GitHub</strong>
-              <span>Keelan4604</span>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="contact-cta anim-reveal">
-        <div class="contact-card-big">
-          <h3>What I'm looking for</h3>
-          <ul>
-            <li>Aerospace engineering roles (systems, propulsion, flight dynamics)</li>
-            <li>AI/automation engineering positions</li>
-            <li>Web design clients (freelance, ongoing)</li>
-            <li>Research collaboration opportunities</li>
+          <ul class="facts">
+            <li><span>Program</span><b class="c">MS Aerospace, Space Systems</b></li>
+            <li><span>Undergrad</span><b>BS Aerospace, Math minor</b></li>
+            <li><span>Honors GPA</span><b class="v">3.64 / 4.0</b></li>
+            <li><span>Status</span><b class="l">U.S. citizen, ITAR eligible</b></li>
+            <li><span>Target roles</span><b class="o">Systems, I&amp;T, Mission Ops, TPM</b></li>
+            <li><span>Summer 2027</span><b>Open to relocating</b></li>
           </ul>
-          <p class="muted">Open to remote and relocation.</p>
-          <a class="btn btn-primary" href="mailto:keelan.odoherty@icloud.com">Send Me an Email</a>
+          <a href="#contact" class="btn btn-primary">Let's talk
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats" aria-label="By the numbers">
+      <div class="container">
+        <div class="stat-grid">
+          <div class="stat reveal"><div class="num"><span data-count="8000">0</span><small>kg</small></div><div class="lbl">of cargo the lunar module is designed to land on the surface</div><span class="tag">NG CAT-LIT</span></div>
+          <div class="stat reveal" data-delay="1"><div class="num"><span data-count="10000">0</span><small>RPM</small></div><div class="lbl">propeller bench tests comparing thrust to acoustic signature</div><span class="tag">AAERO Lab</span></div>
+          <div class="stat reveal" data-delay="2"><div class="num"><span data-count="65">0</span><small>+</small></div><div class="lbl">watercraft restored end to end, teardown through functional test</div><span class="tag">Since 2021</span></div>
+          <div class="stat reveal" data-delay="3"><div class="num"><span data-count="30">0</span><small>+</small></div><div class="lbl">full engine rebuilds and complete electrical rewires</div><span class="tag">Hands on</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>&copy; <span id="year"></span> Keelan O'Doherty</span>
-      <span class="footer-note">Designed and built by me.</span>
-    </div>
-  </footer>
+    <!-- ===== WORK ===== -->
+    <section id="work" class="work">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow violet reveal">Selected work</span>
+          <h2 class="title">Things I've <span class="grad">designed, built, and flown</span>.</h2>
+          <p class="lead reveal">The projects below span requirements and verification, bench and flight test, CAD and analysis, and the hands-on rebuilds that taught me how hardware actually fails.</p>
+        </div>
 
-  <script src="script.js" defer></script>
+        <div class="work-grid">
+
+          <!-- CAT-LIT -->
+          <article class="card c-cyan span-2 reveal">
+            <div class="card-visual">
+              <svg viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05060d"/><stop offset="1" stop-color="#0c1230"/></linearGradient>
+                  <radialGradient id="moonlight" cx="0.5" cy="1" r="0.8"><stop offset="0" stop-color="#3c4a72"/><stop offset="1" stop-color="#0b0f24"/></radialGradient>
+                  <linearGradient id="cargo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+                  <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                </defs>
+                <rect width="1200" height="380" fill="url(#sky)"/>
+                <g fill="#9fb8ff" opacity="0.7">
+                  <circle cx="120" cy="60" r="1.5"/><circle cx="310" cy="40" r="1"/><circle cx="480" cy="90" r="1.3"/><circle cx="700" cy="30" r="1"/><circle cx="880" cy="70" r="1.6"/><circle cx="1050" cy="45" r="1.2"/><circle cx="960" cy="140" r="1"/><circle cx="210" cy="150" r="1"/><circle cx="1130" cy="120" r="1.4"/>
+                </g>
+                <circle cx="1010" cy="110" r="46" fill="#dfe6ff" opacity="0.9"/><circle cx="1010" cy="110" r="46" fill="url(#cargo)" opacity="0.15"/>
+                <ellipse cx="600" cy="420" rx="900" ry="140" fill="url(#moonlight)"/>
+                <path d="M0 300 Q 150 280 300 300 T 600 305 T 900 295 T 1200 305 V380 H0z" fill="#161c3c"/>
+                <g opacity="0.35" stroke="#22d3ee" stroke-width="1" fill="none">
+                  <path d="M0 330 H1200"/><path d="M0 355 H1200"/><path d="M100 300 L60 380"/><path d="M400 300 L380 380"/><path d="M800 300 L820 380"/><path d="M1100 300 L1140 380"/>
+                </g>
+                <!-- lander -->
+                <g transform="translate(600,120)">
+                  <rect x="-70" y="-90" width="140" height="150" rx="14" fill="#1a2144" stroke="#8ea4ff" stroke-width="2"/>
+                  <rect x="-62" y="-82" width="124" height="34" rx="6" fill="#0e1330" stroke="#3b4a7a"/>
+                  <path d="M-70 60 L-120 170 M70 60 L120 170 M-30 60 L-60 170 M30 60 L60 170" stroke="#8ea4ff" stroke-width="3"/>
+                  <ellipse cx="-120" cy="172" rx="16" ry="5" fill="#8ea4ff"/><ellipse cx="120" cy="172" rx="16" ry="5" fill="#8ea4ff"/>
+                  <ellipse cx="-60" cy="172" rx="14" ry="5" fill="#8ea4ff"/><ellipse cx="60" cy="172" rx="14" ry="5" fill="#8ea4ff"/>
+                  <rect x="-18" y="-96" width="36" height="8" rx="3" fill="#22d3ee" filter="url(#glow)"/>
+                  <!-- cable -->
+                  <path d="M0 60 V 150" stroke="#22d3ee" stroke-width="2" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" from="0" to="-40" dur="1.6s" repeatCount="indefinite"/></path>
+                  <!-- cargo container -->
+                  <g>
+                    <animateTransform attributeName="transform" type="translate" values="0 40; 0 110; 0 110; 0 40" keyTimes="0;0.45;0.7;1" dur="7s" repeatCount="indefinite"/>
+                    <rect x="-46" y="10" width="92" height="52" rx="8" fill="url(#cargo)" opacity="0.95" filter="url(#glow)"/>
+                    <g stroke="#05060d" stroke-width="2" opacity="0.5"><path d="M-30 10 V62 M-14 10 V62 M2 10 V62 M18 10 V62 M34 10 V62"/></g>
+                    <text x="0" y="90" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" fill="#22d3ee" letter-spacing="2">8000 KG</text>
+                  </g>
+                </g>
+                <g font-family="JetBrains Mono, monospace" font-size="12" fill="#7c86b3" letter-spacing="2">
+                  <text x="40" y="52">LUNAR CARGO MODULE</text><text x="40" y="74">STARSHIP + BLUE MOON COMPATIBLE</text><text x="40" y="96">5 m / 7 m / 8 m FAIRINGS</text>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><b>Northrop Grumman sponsored, Michigan MDP</b><span>Sep 2026 - present</span></div>
+              <h3>CAT-LIT lunar cargo module, systems engineer</h3>
+              <p>Six-person team designing a standardized cargo module that lands 8,000 kg on the lunar surface with a dry mass under 2,000 kg, compatible with both Starship and Blue Moon and scalable across 5 m, 7 m and 8 m fairings. Think shipping container for the Moon: the value is the standardized interface, and the hard problem is getting cargo from a 30 m airlock down to the regolith and where it needs to go.</p>
+              <ul class="bul">
+                <li>Own the Level 1 through Level 4 requirements set and the verification method for every requirement, following the NASA Systems Engineering Handbook (SP-2016-6105).</li>
+                <li>Maintain the vehicle mass and power budgets across pressurized, unpressurized, powered and unpowered cargo variants.</li>
+                <li>Mentored by Dr. Anthony DeCicco, Senior Mission Architect, and Andrew Kwas, Executive NG Fellow. Presenting to NG leadership in December 2026.</li>
+              </ul>
+              <div class="spec-row">
+                <div class="spec"><b>8,000 kg</b><span>Cargo to surface</span></div>
+                <div class="spec"><b>&lt; 2,000 kg</b><span>Dry mass</span></div>
+                <div class="spec"><b>L1 - L4</b><span>Requirements owned</span></div>
+              </div>
+              <div class="tags"><span>Requirements</span><span>Verification</span><span>Mass &amp; power budgets</span><span>NASA SE Handbook</span><span>SMAD</span><span>Lunar logistics</span></div>
+            </div>
+          </article>
+
+          <!-- AAERO propeller acoustics -->
+          <article class="card c-orange reveal">
+            <div class="card-visual">
+              <svg viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <defs>
+                  <radialGradient id="pg" cx="0.5" cy="0.5" r="0.6"><stop offset="0" stop-color="#ff7a1a" stop-opacity="0.5"/><stop offset="1" stop-color="#05060d" stop-opacity="0"/></radialGradient>
+                  <linearGradient id="blade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient>
+                </defs>
+                <rect width="600" height="300" fill="#080a16"/>
+                <circle cx="300" cy="150" r="150" fill="url(#pg)"/>
+                <!-- acoustic rings -->
+                <g fill="none" stroke="#ff7a1a" stroke-width="1.2">
+                  <circle cx="300" cy="150" r="60" opacity="0.6"><animate attributeName="r" values="60;190" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="3s" repeatCount="indefinite"/></circle>
+                  <circle cx="300" cy="150" r="60" opacity="0.6"><animate attributeName="r" values="60;190" dur="3s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="3s" begin="1s" repeatCount="indefinite"/></circle>
+                  <circle cx="300" cy="150" r="60" opacity="0.6"><animate attributeName="r" values="60;190" dur="3s" begin="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0" dur="3s" begin="2s" repeatCount="indefinite"/></circle>
+                </g>
+                <!-- propeller -->
+                <g transform="translate(300,150)">
+                  <g>
+                    <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="0.9s" repeatCount="indefinite"/>
+                    <path d="M0 0 C 20 -30, 22 -90, 6 -120 C -6 -120, -14 -70, 0 0z" fill="url(#blade)"/>
+                    <path d="M0 0 C 20 -30, 22 -90, 6 -120 C -6 -120, -14 -70, 0 0z" fill="url(#blade)" transform="rotate(180)"/>
+                    <path d="M0 0 C 20 -30, 22 -90, 6 -120 C -6 -120, -14 -70, 0 0z" fill="url(#blade)" transform="rotate(90)" opacity="0.85"/>
+                    <path d="M0 0 C 20 -30, 22 -90, 6 -120 C -6 -120, -14 -70, 0 0z" fill="url(#blade)" transform="rotate(270)" opacity="0.85"/>
+                  </g>
+                  <circle r="14" fill="#1a1e30" stroke="#fbbf24" stroke-width="2"/>
+                </g>
+                <!-- waveform -->
+                <path d="M20 270 Q 40 240 60 270 T 100 270 T 140 270 T 180 270 T 220 270 T 260 270 T 300 270 T 340 270 T 380 270 T 420 270 T 460 270 T 500 270 T 540 270 T 580 270" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.7"/>
+                <g font-family="JetBrains Mono, monospace" font-size="11" fill="#7c86b3" letter-spacing="2"><text x="20" y="30">THRUST vs dB</text><text x="470" y="30">10,000 RPM</text></g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><b>Alabama Aerodynamics Research Lab (AAERO)</b><span>Dec 2024 - May 2026</span></div>
+              <h3>UAV propeller thrust vs. acoustics</h3>
+              <p>Designed, SLA 3D-printed and bench-tested four UAV propeller geometries at 10,000 RPM to map thrust against acoustic signature for the Vertical Flight Society chapter's research program.</p>
+              <ul class="bul">
+                <li>Built the test stand with load-cell thrust instrumentation and microphone acoustic profiling, and wrote the run procedures so every geometry was compared the same way.</li>
+                <li>Correlated measured results against CFD and FEA predictions to isolate where the models diverged from hardware.</li>
+                <li>Presented the findings at the URCA Conference 2025.</li>
+              </ul>
+              <div class="tags"><span>Load-cell instrumentation</span><span>Acoustic profiling</span><span>SLA printing</span><span>CFD / FEA correlation</span><span>Test procedures</span></div>
+            </div>
+          </article>
+
+          <!-- ORCA eVTOL -->
+          <article class="card c-violet reveal" data-delay="1">
+            <div class="card-visual" style="background: radial-gradient(60% 70% at 50% 60%, rgba(167,139,250,0.35), rgba(5,6,13,0) 70%), linear-gradient(180deg,#0b0e1f,#05060d);">
+              <img src="assets/img/orca-iso.png" alt="CAD render of the ORCA fixed-wing eVTOL UAV" class="contain" loading="lazy" style="filter: drop-shadow(0 0 28px rgba(167,139,250,0.5)) drop-shadow(0 24px 30px rgba(0,0,0,0.7)) brightness(1.08);" />
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><b>Senior capstone, team pilot</b><span>Aug 2025 - May 2026</span></div>
+              <h3>ORCA fixed-wing eVTOL UAV</h3>
+              <p>A runway-independent reconnaissance UAV that takes off vertically, transitions to efficient forward cruise, and swaps sensors through a modular nose. My team designed, built and flew it.</p>
+              <ul class="bul">
+                <li>Designed the modular payload nose with standardized mechanical and electrical interfaces, so optical, IR and thermal sensors swap without touching the airframe.</li>
+                <li>Served as team pilot and ran the flight test campaign: phased hover trials, then vertical-to-forward transition trials validating stability, control response and endurance.</li>
+                <li>Modeled the propulsion tilt-path dynamics and servo actuation sequencing in MATLAB/Simulink and validated the power budget against measured draw.</li>
+              </ul>
+              <div class="spec-row">
+                <div class="spec"><b>17 m/s</b><span>Cruise target</span></div>
+                <div class="spec"><b>60 min</b><span>Endurance target</span></div>
+                <div class="spec"><b>~1.35 m</b><span>Wingspan</span></div>
+              </div>
+              <div class="tags"><span>SolidWorks</span><span>MATLAB / Simulink</span><span>Flight test</span><span>3D-printed structure</span><span>Payload integration</span></div>
+            </div>
+          </article>
+
+          <!-- SRPS / LRPS -->
+          <article class="card c-pink reveal">
+            <div class="card-visual" style="background:#0b0e1d;">
+              <img src="assets/img/srps-pressure.png" alt="Solid rocket motor chamber pressure history, 80 second burn" class="contain" loading="lazy" style="filter: invert(1) hue-rotate(180deg) saturate(1.6) brightness(0.95); padding: 18px;" />
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><b>AEM 428, propulsion design</b><span>2025 - 2026</span></div>
+              <h3>Solid and liquid rocket propulsion system design</h3>
+              <p>Two end-to-end propulsion system designs from mission delta-V down to hardware sizing, worked in Python and MATLAB with a full report for each.</p>
+              <ul class="bul">
+                <li>Solid motor for a 5,000 kg payload orbit raise: propellant mass from the two-burn Hohmann delta-V, motor case and burst pressure at a 5.17 MPa average chamber pressure, thrust skirt, insulation, nozzle throat from c* and an 80 s burn, and the web and port ballistics.</li>
+                <li>Liquid H2/LOX stage moving a 50,000 kg payload from GEO to lunar orbit at 450 s Isp, with tank sizing from the 5.5 mixture ratio and propellant densities.</li>
+              </ul>
+              <div class="tags"><span>Hohmann transfer</span><span>Chamber pressure</span><span>Nozzle sizing</span><span>Grain ballistics</span><span>Python</span><span>MATLAB</span></div>
+            </div>
+          </article>
+
+          <!-- EcoPro CAD -->
+          <article class="card c-lime reveal" data-delay="1">
+            <div class="card-visual" style="background:#e9ecf3;">
+              <img src="assets/img/ecopro-d8t.webp" alt="SolidWorks model of a Caterpillar D8T air induction assembly" loading="lazy" style="object-fit: cover; object-position: center;" />
+            </div>
+            <div class="card-body">
+              <div class="card-meta"><b>EcoPro Corp, product design and IT</b><span>2018 - present</span></div>
+              <h3>Filtration and protection components for Cat and Komatsu equipment</h3>
+              <p>CAD design and product development for filtration and protection parts fitted to Caterpillar and Komatsu heavy equipment, designed to OEM fitment guidelines and customer-defined requirements.</p>
+              <ul class="bul">
+                <li>Produce SolidWorks models, drawings and manufacturing documentation, and manage revisions across customers, suppliers and production.</li>
+                <li>Rebuilt and now run the company website and IT: DNS migration and hosting, admin tooling, and lead generation for the mining sector.</li>
+              </ul>
+              <div class="tags"><span>SolidWorks</span><span>OEM fitment</span><span>Manufacturing drawings</span><span>Revision control</span><span>IT operations</span></div>
+              <div class="card-links"><a href="https://ecoprousa.com" target="_blank" rel="noopener">ecoprousa.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></a></div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- more builds -->
+        <div class="section-head" style="margin-top:72px;margin-bottom:8px;">
+          <span class="eyebrow gold reveal">More builds</span>
+          <h2 class="title" style="font-size:clamp(28px,3.4vw,40px);">Hands-on, end to end.</h2>
+        </div>
+        <div class="more-grid">
+          <a class="mini reveal" href="https://github.com/Keelan4604/sim7000A-cellular-GSM-connection" target="_blank" rel="noopener">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20v-4"/></svg></div>
+            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+            <h4>Embedded vehicle control with LTE telemetry</h4>
+            <p>Arduino-based control node with GSM/IoT telemetry over LTE CAT-M1 (SIM7000A) for remote monitoring and actuation. Power distribution with transistor logic and relay control, physical harness wired by hand.</p>
+            <div class="tags"><span>Arduino / C++</span><span>SIM7000A</span><span>Relay logic</span></div>
+          </a>
+          <a class="mini reveal" data-delay="1" href="https://github.com/Keelan4604/Arduino-Controller-for-Upfitter-Switches" target="_blank" rel="noopener">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+            <h4>Upfitter switch controller</h4>
+            <p>Microcontroller-driven switching and power control for vehicle upfitter accessories, plus electrical and mechanical fault isolation, rewiring, and CANbus analysis on automotive platforms.</p>
+            <div class="tags"><span>Automotive electrical</span><span>CANbus</span><span>Diagnostics</span></div>
+          </a>
+          <div class="mini reveal" data-delay="2">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#ff7a1a" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></div>
+            <h4>Watercraft restoration, 65+ units</h4>
+            <p>Owner and technician since 2021. Full engine rebuilds and complete electrical rewires from teardown through functional test, with written teardown, build and checkout procedures that cut rework on later units.</p>
+            <div class="tags"><span>Engine rebuilds</span><span>Harness fabrication</span><span>Test procedures</span></div>
+          </div>
+          <div class="mini reveal">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a3e635" stroke-width="2"><path d="M3 7h13l4 5v5H3z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></div>
+            <h4>PowerPro Rentals LLC, founder</h4>
+            <p>Formed an LLC and took a heavy equipment rental business from concept to profit in one summer: market research, pricing, purchasing, supply chain, logistics and finances, with partnerships across ten local businesses.</p>
+            <div class="tags"><span>P&amp;L</span><span>Supply chain</span><span>Operations</span></div>
+          </div>
+          <a class="mini reveal" data-delay="1" href="https://github.com/Keelan4604/Docker-Setup" target="_blank" rel="noopener">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01"/></svg></div>
+            <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+            <h4>Self-hosted infrastructure</h4>
+            <p>Automated Docker deployments and server integrations on Linux, a Hyper-V lab, Nextcloud storage and Home Assistant automation, all reachable remotely through tunnels rather than open ports.</p>
+            <div class="tags"><span>Docker</span><span>Linux</span><span>Home Assistant</span><span>Nextcloud</span></div>
+          </a>
+          <div class="mini reveal" data-delay="2">
+            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#f472b6" stroke-width="2"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9z"/><path d="M12 12l9-4.5M12 12v9M12 12L3 7.5"/></svg></div>
+            <h4>CAD and 3D printing</h4>
+            <p>A steady stream of SolidWorks parts and fixtures, from printer stands and drawer organizers to tool-box mounts, printed on a Bambu Lab P2S. SLA and FDM, and enough failed prints to know why they fail.</p>
+            <div class="tags"><span>SolidWorks</span><span>FDM / SLA</span><span>Bambu Lab</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience" class="experience">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow orange reveal">Experience</span>
+          <h2 class="title">Where I've <span class="grad-ov">worked</span>.</h2>
+        </div>
+        <div class="timeline">
+          <div class="progress"></div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>Sep 2026 - present</b>Ann Arbor, MI</div>
+            <div class="tl-body">
+              <h3>Systems Engineer, NG CAT-LIT lunar cargo module</h3>
+              <div class="org">Northrop Grumman sponsored project, Michigan Multidisciplinary Design Program</div>
+              <ul>
+                <li>Systems engineer on a six-person team designing a standardized cargo module to land 8,000 kg on the lunar surface, compatible with Starship and Blue Moon.</li>
+                <li>Developing the Level 1 through Level 4 requirements set and per-requirement verification methods; maintaining the vehicle mass and power budgets.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>Dec 2024 - May 2026</b>Tuscaloosa, AL</div>
+            <div class="tl-body">
+              <h3>Undergraduate Research Assistant</h3>
+              <div class="org">University of Alabama Aerodynamics Research Laboratory (AAERO), Vertical Flight Society chapter</div>
+              <ul>
+                <li>Designed, SLA 3D-printed and bench-tested four UAV propeller geometries at 10,000 RPM to characterize thrust against acoustic performance.</li>
+                <li>Built the test setup and authored run procedures with load-cell thrust instrumentation and microphone acoustic profiling.</li>
+                <li>Correlated measured results against CFD and FEA predictions; presented at the URCA Conference 2025.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>Aug 2025 - May 2026</b>Tuscaloosa, AL</div>
+            <div class="tl-body">
+              <h3>Team Pilot and Integration, fixed-wing eVTOL capstone</h3>
+              <div class="org">Senior capstone, design, build and flight test</div>
+              <ul>
+                <li>Designed the modular payload nose; ran the hover and transition flight test campaign as team pilot.</li>
+                <li>Modeled tilt-path dynamics and servo sequencing in MATLAB/Simulink; validated the power budget against measured draw.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>Jul 2024 - Aug 2024</b>Phoenix, AZ</div>
+            <div class="tl-body">
+              <h3>Engineering Intern</h3>
+              <div class="org">Wilson &amp; Company</div>
+              <ul>
+                <li>More than fifty hours on site documenting nonconformances and as-built conditions across active construction projects.</li>
+                <li>Worked with senior engineers on project plans and timelines, and contributed to reports for client presentations and regulatory submissions.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>2018 - present</b>Phoenix, AZ</div>
+            <div class="tl-body">
+              <h3>Product Design and IT</h3>
+              <div class="org">EcoPro Corp</div>
+              <ul>
+                <li>CAD design and product development for filtration and protection components fitted to Caterpillar and Komatsu equipment, to OEM fitment guidelines.</li>
+                <li>SolidWorks models, drawings and manufacturing documentation; revision management across customers, suppliers and production. Rebuilt the company website and IT stack.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>May 2023 - Aug 2023</b>Phoenix, AZ</div>
+            <div class="tl-body">
+              <h3>Founder</h3>
+              <div class="org">PowerPro Rentals LLC</div>
+              <ul>
+                <li>Founded and operated a profitable heavy equipment rental LLC: market research, pricing, purchasing, supply chain, logistics and finances, with partnerships across ten local businesses.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-when"><b>Feb 2021 - Aug 2026</b>Phoenix, AZ</div>
+            <div class="tl-body">
+              <h3>Owner and Technician, watercraft restoration</h3>
+              <div class="org">Independent</div>
+              <ul>
+                <li>Restored 65+ watercraft end to end, including 30+ full engine rebuilds and 30+ complete electrical rewires, from teardown through functional test.</li>
+                <li>Fabricated wire harnesses and mechanical subassemblies to torque specification; wrote repeatable teardown, build and checkout procedures.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education" class="education">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow reveal">Education</span>
+          <h2 class="title">Alabama to <span class="grad-cv">Michigan</span>.</h2>
+        </div>
+        <div class="edu-grid">
+          <div class="edu reveal">
+            <div class="accent"></div>
+            <div class="logo"><img src="assets/img/logo-umich.png" alt="University of Michigan" /></div>
+            <h3>University of Michigan</h3>
+            <div class="deg">Master of Science, Aerospace Engineering, Space Systems</div>
+            <div class="when">Aug 2026 - present · Ann Arbor, MI</div>
+            <ul>
+              <li>Spacecraft Technology, Space Policy &amp; Management, Linear Systems Theory, Management of Space Systems Design, Astrodynamics</li>
+              <li>Northrop Grumman sponsored MDP team project (CAT-LIT), systems role</li>
+            </ul>
+          </div>
+          <div class="edu violet reveal" data-delay="1">
+            <div class="accent"></div>
+            <div class="logo"><img src="assets/img/logo-ua.png" alt="The University of Alabama" /></div>
+            <h3>The University of Alabama, Honors College</h3>
+            <div class="deg">Bachelor of Science, Aerospace Engineering, Minor in Mathematics</div>
+            <div class="when">Aug 2022 - May 2026 · Tuscaloosa, AL</div>
+            <ul>
+              <li>Honors GPA 3.64 / 4.0. Dean's List every semester, Fall 2022 through Spring 2025</li>
+              <li>Full-Ride Academic, Presidential, Engineering, and Taylor Lewan Offensive Line scholarships</li>
+              <li>Aerodynamics, propulsion, compressible flow, structures, orbital mechanics, feedback control, aircraft design</li>
+            </ul>
+          </div>
+          <div class="edu orange reveal" data-delay="2">
+            <div class="accent"></div>
+            <div class="logo text">Florence, Italy</div>
+            <h3>Florence University of the Arts</h3>
+            <div class="deg">Study abroad</div>
+            <div class="when">May 2024 · Florence, Italy</div>
+            <ul>
+              <li>Summer term abroad. Conversational Spanish; piano, cello and guitar on the side.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills" class="skills">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow pink reveal">Skills</span>
+          <h2 class="title">What I bring to a <span class="grad">program</span>.</h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-group cyan reveal">
+            <header><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19" cy="18" r="2"/></svg></div><div><h3>Systems engineering</h3><small>The spine of the CAT-LIT project</small></div></header>
+            <div class="chips"><span>Requirements development (L1 - L4)</span><span>Verification: inspection, analysis, demo, test</span><span>Mass &amp; power budgets</span><span>Trade studies</span><span>Interface definition</span><span>NASA SE Handbook</span><span>SMAD</span><span>Test procedure development</span><span>Design reviews</span></div>
+          </div>
+          <div class="skill-group orange reveal" data-delay="1">
+            <header><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><div><h3>Build and test</h3><small>Where the hardware gets honest</small></div></header>
+            <div class="chips"><span>Mechanical &amp; engine assembly</span><span>Wire harness fabrication</span><span>Electrical troubleshooting</span><span>Load-cell instrumentation</span><span>Acoustic measurement</span><span>SLA &amp; FDM 3D printing</span><span>Torque &amp; fastener practice</span><span>Flight test operations</span><span>Circuit design</span></div>
+          </div>
+          <div class="skill-group violet reveal" data-delay="2">
+            <header><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div><div><h3>Design and analysis</h3><small>From sketch to correlated model</small></div></header>
+            <div class="chips"><span>SolidWorks</span><span>AutoCAD</span><span>ANSYS Fluent (CFD)</span><span>SolidWorks Flow Simulation</span><span>Finite Element Analysis</span><span>MATLAB / Simulink</span><span>Astrodynamics</span><span>Propulsion sizing</span><span>Data analysis</span></div>
+          </div>
+          <div class="skill-group pink reveal" data-delay="3">
+            <header><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13 5l-2 14"/></svg></div><div><h3>Software and infrastructure</h3><small>Tools I reach for daily</small></div></header>
+            <div class="chips"><span>Python</span><span>Arduino / C++</span><span>Linux</span><span>Docker</span><span>Git / GitHub</span><span>Cloudflare</span><span>Home Assistant</span><span>Hyper-V</span><span>Microsoft 365</span><span>Google Workspace</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RESUME ===== -->
+    <section id="resume" class="resume">
+      <div class="container">
+        <div class="resume-copy">
+          <span class="eyebrow lime reveal">Resume</span>
+          <h2 class="title">One page, <span class="grad-cv">current</span>.</h2>
+          <p class="lead reveal">Everything above, condensed to the page a recruiter actually reads. Updated September 2026.</p>
+          <div class="btns reveal" data-delay="1">
+            <a class="btn btn-primary" href="assets/Keelan_ODoherty_Resume.pdf" download="Keelan_ODoherty_Resume.pdf">Download PDF
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 4v12M6 10l6 6 6-6M4 20h16"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="assets/Keelan_ODoherty_Resume.pdf" target="_blank" rel="noopener">Open in new tab
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+          <p class="note reveal" data-delay="2">Short link: keelanodoherty.org/resume</p>
+        </div>
+        <div class="resume-frame reveal" data-delay="1">
+          <div class="resume-bar"><div class="dots"><i></i><i></i><i></i></div><span>Keelan_ODoherty_Resume.pdf</span><span>1 page</span></div>
+          <iframe id="resume-frame" src="assets/Keelan_ODoherty_Resume.pdf#toolbar=0&navpanes=0&view=FitH" title="Keelan O'Doherty resume" loading="lazy"></iframe>
+          <div class="resume-fallback">The inline viewer is hidden on small screens. Use the buttons above to open or download the PDF.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact-card reveal">
+          <div class="contact-inner">
+            <div>
+              <span class="eyebrow">Contact</span>
+              <h2>Let's build something that <span class="grad">flies</span>.</h2>
+              <p class="lead">I'm looking for a Summer 2027 internship in systems engineering, integration and test, or mission operations, and I'm happy to talk about any of the work above. Based in Ann Arbor, open to relocating.</p>
+            </div>
+            <div class="contact-links">
+              <a href="mailto:keelan.odoherty@icloud.com">
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg></span>
+                <div><b>Email</b><span>keelan.odoherty@icloud.com</span></div>
+                <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <a href="https://linkedin.com/in/keelanodoherty" target="_blank" rel="noopener">
+                <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 11-4-.002 2 2 0 014 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z"/></svg></span>
+                <div><b>LinkedIn</b><span>linkedin.com/in/keelanodoherty</span></div>
+                <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <a href="https://github.com/Keelan4604" target="_blank" rel="noopener">
+                <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 015.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg></span>
+                <div><b>GitHub</b><span>github.com/Keelan4604</span></div>
+                <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+              <a href="tel:+16023762533">
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg></span>
+                <div><b>Phone</b><span>602.376.2533</span></div>
+                <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <span>&copy; <span id="year">2026</span> Keelan O'Doherty</span>
+        <span class="sig">Designed and built by me · Ann Arbor, MI</span>
+        <span><a href="#top">Back to top &uarr;</a></span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js" defer></script>
+  <script type="module" src="scene.js"></script>
 </body>
 </html>
