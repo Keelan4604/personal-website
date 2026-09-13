@@ -26,7 +26,7 @@ integration and test, mission operations, TPM at space companies).
 
 | File | What |
 |---|---|
-| `index.html` | One page. Hero, marquee, about, stats, work (5 featured + 6 minis), experience timeline, education, skills, resume, contact. |
+| `index.html` | One page. Hero (name, degrees, links), stats, projects (5 featured + 6 short), compact experience list, education, skills, resume, contact with headshot. |
 | `styles.css` | Design system. **Light theme** (2026-09-12): off-white ground, white cards with soft shadows, cyan / violet / orange accents, Space Grotesk + Inter + JetBrains Mono. |
 | `main.js` | Lenis smooth scroll, GSAP hero reveal, typed role, reveals, counters, timeline progress, mobile menu. One rAF-coalesced scroll pass with cached offsets. |
 | `scene.js` | Three.js hero: procedural launch vehicle on a pad in daylight. Scroll ignites it and it climbs out of frame; the scene fades out before the About section. ES module via importmap, CDN-hosted three 0.170. Off automatically without WebGL and on viewports under 820 px. |
@@ -57,6 +57,13 @@ frame-time watchdog that drops to 1x resolution and then disables the scene if f
 **Do not reintroduce bloom, a noise-shader planet, or card-level backdrop-filter.**
 
 ## Content rules that apply here
+
+- **Facts only, no voice copy (Keelan, 2026-09-13).** He called the first version a brick of
+  text with cheesy, obviously-AI lines. Everything interpretive was cut: the typed role phrases,
+  the About prose, the buzzword marquee, clever section headings, skill-group subtitles, the
+  contact pitch, the loader text, the footer tagline. Headings are plain nouns. Cards are meta,
+  title, one factual line, specs, up to three short bullets. Experience is a compact list with no
+  bullets because the projects already carry that detail. Do not add any of it back.
 
 - Same writing rules as cover letters: no em dashes, no bold inside sentences, no
   negation-contrast, no AI mention anywhere on the site.

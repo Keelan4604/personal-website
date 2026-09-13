@@ -1,7 +1,6 @@
 /* =====================================================================
    Keelan O'Doherty - portfolio
-   Interactions: smooth scroll, reveals, hero text, counters, nav,
-   timeline progress, typed role.
+   Interactions: smooth scroll, reveals, hero entrance, counters, nav.
 
    Scroll work is coalesced into one rAF-driven pass and section offsets
    are cached, so scrolling does not thrash layout. The previous version
@@ -11,12 +10,6 @@
 (function () {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = window.matchMedia('(pointer: fine)').matches;
-
-  /* ---------- loader ---------- */
-  const loader = document.getElementById('loader');
-  const hideLoader = () => loader && loader.classList.add('done');
-  window.addEventListener('load', () => setTimeout(hideLoader, 550));
-  setTimeout(hideLoader, 2400);
 
   /* ---------- smooth scroll ---------- */
   let lenis = null;
@@ -112,30 +105,6 @@
     gsap.timeline({ delay: 0.7, defaults: { ease: 'power4.out' } })
       .to(heroLines, { yPercent: 0, duration: 1.1, stagger: 0.1, clearProps: 'willChange' })
       .to(heroBits, { opacity: 1, y: 0, duration: 0.8, stagger: 0.07 }, '-=0.65');
-  }
-
-  /* ---------- typed role ---------- */
-  const typed = document.getElementById('typed');
-  const roles = [
-    'systems engineer in training',
-    'lunar cargo module designer',
-    'eVTOL test pilot',
-    'propeller acoustics researcher',
-    'builder of things that fly',
-  ];
-  if (typed && !reduced) {
-    let ri = 0, ci = 0, del = false;
-    (function tick() {
-      const word = roles[ri];
-      typed.textContent = word.slice(0, ci);
-      let wait = del ? 32 : 60 + Math.random() * 40;
-      if (!del && ci === word.length) { del = true; wait = 2000; }
-      else if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; wait = 400; }
-      ci += del ? -1 : 1;
-      setTimeout(tick, wait);
-    })();
-  } else if (typed) {
-    typed.textContent = roles[0];
   }
 
   /* ---------- reveals ---------- */
