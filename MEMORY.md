@@ -30,7 +30,7 @@ integration and test, mission operations, TPM at space companies).
 | `styles.css` | Design system. **Light theme** (2026-09-12): off-white ground, white cards with soft shadows, cyan / violet / orange accents, Space Grotesk + Inter + JetBrains Mono. |
 | `main.js` | Lenis smooth scroll, GSAP hero reveal, typed role, reveals, counters, timeline progress, mobile menu. One rAF-coalesced scroll pass with cached offsets. |
 | `scene.js` | Three.js hero: procedural launch vehicle on a pad in daylight. Scroll ignites it and it climbs out of frame; the scene fades out before the About section. ES module via importmap, CDN-hosted three 0.170. Off automatically without WebGL and on viewports under 820 px. |
-| `assets/Keelan_ODoherty_Resume.pdf` | Copy of `Career/Job-Search/materials/ODoherty-Keelan-Resume-CURRENT.pdf`. **Re-copy whenever the resume changes.** `/resume` redirects here. |
+| `assets/Keelan_ODoherty_Resume.pdf` | Copy of `Career/Me/materials/ODoherty-Keelan-Resume-CURRENT.pdf`. **Re-copy whenever the resume changes.** `/resume` redirects here. |
 | `assets/img/` | headshot (200px, only one on file), UA and UMich wordmarks, ORCA isometric render (background knocked out from `School/Classes/402/ORCA_v6/Images/isometric.png`), SRPS chamber-pressure plot (AEM 428), EcoPro D8T air-induction CAD render, `og.png` share card. |
 | `_headers`, `_redirects` | Security headers, asset caching, `/resume` and old `/senior-project` redirects. |
 | `favicon.svg` | Gradient rocket mark. |
@@ -68,11 +68,11 @@ frame-time watchdog that drops to 1x resolution and then disables the scene if f
 - Same writing rules as cover letters: no em dashes, no bold inside sentences, no
   negation-contrast, no AI mention anywhere on the site.
 - **GPA on the site is 3.64**, matching the resume. The transcript on file says 3.612 and the
-  number is unverified (see `Career/Job-Search/materials/MEMORY.md`). Change both together.
+  number is unverified (see `Career/Me/materials/MEMORY.md`). Change both together.
 - **Graduation date is deliberately not stated.** UMich shows "Aug 2026 - present". He may stay
   to May 2028.
 - Source of truth for every claim is the resume template
-  (`Career/Job-Search/materials/templates/resume-template.html`) plus
+  (`Career/Me/materials/templates/resume-template.html`) plus
   `School/Classes/space582/ng-cat-lit-project/MEMORY.md` for CAT-LIT and
   `Memory/core/career.md` for EcoPro. Keep numbers consistent with those (65+ watercraft,
   30+ rebuilds, 4 propeller geometries, 10,000 RPM, 8,000 kg / 2,000 kg).
